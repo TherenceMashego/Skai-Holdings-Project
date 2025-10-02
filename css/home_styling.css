@@ -225,7 +225,8 @@ body {
     justify-content: center;
     align-items: center;
     transform: translateZ(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
+    margin-left: -14rem;
 }
 
 .bot-container {
@@ -235,8 +236,8 @@ body {
 }
 
 .bot-image {
-    width: 200%; /* Increased from 150% */
-    max-width: 500px; /* Increased from 400px */
+    width: 400%; /* Increased from 150% */
+    max-width: 800px; /* Increased from 400px */
     height: auto;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
     opacity: 0;
@@ -762,7 +763,7 @@ body {
 }
 
 .footer-logo img {
-    height: 40px;
+    height: 150px;
     width: auto;
 }
 
