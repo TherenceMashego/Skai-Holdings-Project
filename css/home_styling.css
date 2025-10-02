@@ -97,7 +97,6 @@ body {
 }
 
 /* Hero Section with Background Effects */
-/* Hero Section with Background Image and Effects */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -133,7 +132,7 @@ body {
     position: absolute;
     background: var(--accent-color);
     border-radius: 50%;
-    opacity: 0.25; /* Increased from 0.1 to 0.25 for brighter effect */
+    opacity: 1.; /* Increased from 0.1 to 0.25 for brighter effect */
     animation: float 8s infinite ease-in-out;
 }
 
