@@ -86,6 +86,16 @@ body {
     width: 100%;
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-dark);
+}
+
 /* Hero Section with Background Effects */
 .hero {
     position: relative;
@@ -208,7 +218,7 @@ body {
     box-shadow: 0 20px 40px rgba(37, 99, 235, 0.3);
 }
 
-/* Bot Container */
+/* Bot Container - Updated with larger size */
 .hero-visual {
     position: relative;
     display: flex;
@@ -225,8 +235,8 @@ body {
 }
 
 .bot-image {
-    width: 100%;
-    max-width: 400px;
+    width: 200%; /* Increased from 150% */
+    max-width: 500px; /* Increased from 400px */
     height: auto;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
     opacity: 0;
@@ -240,8 +250,8 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
+    width: 140%; /* Increased from 120% */
+    height: 140%; /* Increased from 120% */
     background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
     filter: blur(20px);
     opacity: 0;
@@ -619,8 +629,30 @@ body {
         display: none;
     }
     
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-light);
+        flex-direction: column;
+        padding: 2rem;
+        border-top: 1px solid var(--border-light);
+        box-shadow: var(--shadow);
+    }
+    
     .bot-image {
-        max-width: 300px;
+        max-width: 350px; /* Adjusted for tablets */
+        width: 180%; /* Adjusted for tablets */
+    }
+    
+    .bot-container {
+        transform: scale(0.9); /* Slightly scale down on tablets */
     }
     
     .section-title {
@@ -644,5 +676,42 @@ body {
     .about-grid,
     .services-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .bot-image {
+        max-width: 280px; /* Adjusted for mobile */
+        width: 160%; /* Adjusted for mobile */
+    }
+    
+    .bot-container {
+        transform: scale(0.8); /* Further scale down for mobile */
+    }
+    
+    .hero-content {
+        gap: 2rem;
+    }
+}
+
+/* Extra small screen support */
+@media (max-width: 360px) {
+    .bot-image {
+        max-width: 250px;
+        width: 150%;
+    }
+    
+    .bot-container {
+        transform: scale(0.75);
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
     }
 }

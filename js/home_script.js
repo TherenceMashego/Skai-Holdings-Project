@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCounterAnimations();
     initializeCarousel();
     initializeHeroHoverEffects();
+    initializeMobileMenu();
 });
 
 // Floating Particles System (Hero only)
@@ -44,6 +45,25 @@ function createParticle(container) {
     container.appendChild(particle);
 }
 
+// Mobile Menu Toggle
+function initializeMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    }
+}
+
 // Hero Hover Effects
 function initializeHeroHoverEffects() {
     const hero = document.querySelector('.hero');
@@ -70,7 +90,9 @@ function initializeHeroHoverEffects() {
         if (heroTitle) heroTitle.style.transform = `translateX(${-x/2}px) translateZ(0)`;
         if (heroSubtitle) heroSubtitle.style.transform = `translateX(${-x/2}px) translateZ(0)`;
         if (heroVisual) heroVisual.style.transform = `translateX(${x}px) translateZ(0)`;
-        if (botImage) botImage.style.transform = `translateX(${x/2}px) translateY(${y/2}px) scale(1.02) translateZ(0)`;
+        
+        // Reduced movement for larger bot to prevent excessive shifting
+        if (botImage) botImage.style.transform = `translateX(${x/3}px) translateY(${y/3}px) scale(1.02) translateZ(0)`;
     });
     
     // Reset transforms when mouse leaves
