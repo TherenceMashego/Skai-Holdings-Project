@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCarousel();
     initializeHeroHoverEffects();
     initializeMobileMenu();
+    initializeHeroAnimations(); // New function for synchronized animations
 });
 
 // Floating Particles System (Hero only)
@@ -62,6 +63,63 @@ function initializeMobileMenu() {
             });
         });
     }
+}
+
+// New function for synchronized hero animations
+function initializeHeroAnimations() {
+    const heroTitle = document.querySelector('.hero-title');
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    const ctaButton = document.querySelector('.cta-button');
+    const botImage = document.getElementById('botImage');
+    
+    if (!heroTitle || !botImage) return;
+    
+    // Reset initial states
+    heroTitle.style.opacity = '0';
+    heroTitle.style.transform = 'translateY(30px)';
+    
+    if (heroSubtitle) {
+        heroSubtitle.style.opacity = '0';
+        heroSubtitle.style.transform = 'translateY(30px)';
+    }
+    
+    if (ctaButton) {
+        ctaButton.style.opacity = '0';
+        ctaButton.style.transform = 'translateY(30px)';
+    }
+    
+    // Staggered animation sequence
+    setTimeout(() => {
+        // Bot image animation
+        botImage.style.opacity = '1';
+        botImage.style.transform = 'translateY(0) scale(1)';
+        botImage.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        
+        // Title animation (starts slightly after bot)
+        setTimeout(() => {
+            heroTitle.style.opacity = '1';
+            heroTitle.style.transform = 'translateY(0)';
+            heroTitle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s';
+        }, 200);
+        
+        // Subtitle animation (starts after title)
+        if (heroSubtitle) {
+            setTimeout(() => {
+                heroSubtitle.style.opacity = '1';
+                heroSubtitle.style.transform = 'translateY(0)';
+                heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s';
+            }, 400);
+        }
+        
+        // CTA button animation (starts last)
+        if (ctaButton) {
+            setTimeout(() => {
+                ctaButton.style.opacity = '1';
+                ctaButton.style.transform = 'translateY(0)';
+                ctaButton.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s';
+            }, 600);
+        }
+    }, 500); // Initial delay
 }
 
 // Hero Hover Effects
