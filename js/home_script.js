@@ -1,4 +1,4 @@
-// falcorp_script.js
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeScrollAnimations();
