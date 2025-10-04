@@ -1,50 +1,13 @@
+// falcorp_script.js
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeParticles();
     initializeScrollAnimations();
     initializeCounterAnimations();
     initializeCarousel();
-    initializeHeroHoverEffects();
     initializeMobileMenu();
-    initializeHeroAnimations(); // New function for synchronized animations
+    initializeHeroEffects();
+    initializeHoverEffects();
 });
-
-// Floating Particles System (Hero only)
-function initializeParticles() {
-    const particlesContainer = document.getElementById('particles');
-    const particleCount = 30;
-    
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(particlesContainer);
-    }
-}
-
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    
-    // Random properties
-    const size = Math.random() * 6 + 2;
-    const posX = Math.random() * 100;
-    const posY = Math.random() * 100;
-    const duration = Math.random() * 8 + 4;
-    const delay = Math.random() * 5;
-    
-    // Apply styles
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    particle.style.left = `${posX}%`;
-    particle.style.top = `${posY}%`;
-    particle.style.animationDuration = `${duration}s`;
-    particle.style.animationDelay = `${delay}s`;
-    
-    // Random blue color
-    const colors = ['#2563eb', '#3b82f6', '#06b6d4'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    particle.style.background = color;
-    
-    container.appendChild(particle);
-}
 
 // Mobile Menu Toggle
 function initializeMobileMenu() {
@@ -54,128 +17,23 @@ function initializeMobileMenu() {
     if (mobileMenuToggle && navLinks) {
         mobileMenuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            mobileMenuToggle.classList.toggle('active');
         });
         
         // Close menu when clicking on a link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
             });
         });
     }
 }
 
-// New function for synchronized hero animations
-function initializeHeroAnimations() {
-    const heroTitle = document.querySelector('.hero-title');
-    const heroSubtitle = document.querySelector('.hero-subtitle');
-    const ctaButton = document.querySelector('.cta-button');
-    const botImage = document.getElementById('botImage');
-    
-    if (!heroTitle || !botImage) return;
-    
-    // Reset initial states
-    heroTitle.style.opacity = '0';
-    heroTitle.style.transform = 'translateY(30px)';
-    
-    if (heroSubtitle) {
-        heroSubtitle.style.opacity = '0';
-        heroSubtitle.style.transform = 'translateY(30px)';
-    }
-    
-    if (ctaButton) {
-        ctaButton.style.opacity = '0';
-        ctaButton.style.transform = 'translateY(30px)';
-    }
-    
-    // Staggered animation sequence
-    setTimeout(() => {
-        // Bot image animation
-        botImage.style.opacity = '1';
-        botImage.style.transform = 'translateY(0) scale(1)';
-        botImage.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        
-        // Title animation (starts slightly after bot)
-        setTimeout(() => {
-            heroTitle.style.opacity = '1';
-            heroTitle.style.transform = 'translateY(0)';
-            heroTitle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s';
-        }, 200);
-        
-        // Subtitle animation (starts after title)
-        if (heroSubtitle) {
-            setTimeout(() => {
-                heroSubtitle.style.opacity = '1';
-                heroSubtitle.style.transform = 'translateY(0)';
-                heroSubtitle.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s';
-            }, 400);
-        }
-        
-        // CTA button animation (starts last)
-        if (ctaButton) {
-            setTimeout(() => {
-                ctaButton.style.opacity = '1';
-                ctaButton.style.transform = 'translateY(0)';
-                ctaButton.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s';
-            }, 600);
-        }
-    }, 500); // Initial delay
-}
-
-// Hero Hover Effects
-function initializeHeroHoverEffects() {
-    const hero = document.querySelector('.hero');
-    const botImage = document.getElementById('botImage');
-    
-    if (!hero || !botImage) return;
-    
-    // Mouse move effect for the entire hero section
-    hero.addEventListener('mousemove', (e) => {
-        const { clientX, clientY } = e;
-        const { left, top, width, height } = hero.getBoundingClientRect();
-        
-        // Calculate mouse position relative to hero center
-        const x = (clientX - left - width / 2) / 25;
-        const y = (clientY - top - height / 2) / 25;
-        
-        // Apply transform to elements
-        const heroText = document.querySelector('.hero-text');
-        const heroTitle = document.querySelector('.hero-title');
-        const heroSubtitle = document.querySelector('.hero-subtitle');
-        const heroVisual = document.querySelector('.hero-visual');
-        
-        if (heroText) heroText.style.transform = `translateX(${-x}px) translateZ(0)`;
-        if (heroTitle) heroTitle.style.transform = `translateX(${-x/2}px) translateZ(0)`;
-        if (heroSubtitle) heroSubtitle.style.transform = `translateX(${-x/2}px) translateZ(0)`;
-        if (heroVisual) heroVisual.style.transform = `translateX(${x}px) translateZ(0)`;
-        
-        // Reduced movement for larger bot to prevent excessive shifting
-        if (botImage) botImage.style.transform = `translateX(${x/3}px) translateY(${y/3}px) scale(1.02) translateZ(0)`;
-    });
-    
-    // Reset transforms when mouse leaves
-    hero.addEventListener('mouseleave', () => {
-        const elements = [
-            '.hero-text',
-            '.hero-title', 
-            '.hero-subtitle',
-            '.hero-visual',
-            '#botImage'
-        ];
-        
-        elements.forEach(selector => {
-            const element = document.querySelector(selector);
-            if (element) {
-                element.style.transform = 'translateZ(0)';
-            }
-        });
-    });
-}
-
 // Scroll Animations
 function initializeScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
+        threshold: 0.05,
         rootMargin: '0px 0px -50px 0px'
     };
     
@@ -183,13 +41,34 @@ function initializeScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                
+                // For counter elements, start counting when they become visible
+                if (entry.target.classList.contains('stat-number')) {
+                    animateCounter(entry.target);
+                }
             }
         });
     }, observerOptions);
     
-    // Observe all animatable elements
-    const animatableElements = document.querySelectorAll('.fade-in, .slide-up, .zoom-in');
-    animatableElements.forEach(el => observer.observe(el));
+    // Observe elements with animation classes
+    document.querySelectorAll('.fade-in, .slide-up, .zoom-in').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Observe counter elements
+    document.querySelectorAll('.stat-number').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Observe service cards
+    document.querySelectorAll('.service-card').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // Observe about image
+    document.querySelectorAll('.image-container').forEach(el => {
+        observer.observe(el);
+    });
     
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -197,63 +76,298 @@ function initializeScrollAnimations() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
     });
+    
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.querySelector('.header');
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.97)';
+            header.style.backdropFilter = 'blur(10px)';
+            header.style.padding = '0.5rem 0';
+            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+            header.style.background = 'var(--bg-light)';
+            header.style.backdropFilter = 'none';
+            header.style.padding = '1rem 0';
+            header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+        }
+    });
 }
 
-// Animated Counters
+// Counter Animation
 function initializeCounterAnimations() {
-    const counters = document.querySelectorAll('.stat-number');
+    // This will be triggered by the scroll observer
+}
+
+function animateCounter(element) {
+    const target = parseInt(element.getAttribute('data-target'));
+    const duration = 1500; // 1.5 seconds (faster)
+    const frameDuration = 1000 / 60; // 60fps
+    const totalFrames = Math.round(duration / frameDuration);
+    let frame = 0;
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
+    // Check if already animated
+    if (element.classList.contains('animated')) return;
+    element.classList.add('animated');
+    
+    const counter = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        // Use easing function for more natural animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentCount = Math.round(target * easeOutQuart);
+        
+        element.textContent = currentCount;
+        
+        if (frame === totalFrames) {
+            clearInterval(counter);
+            element.textContent = target;
+        }
+    }, frameDuration);
+}
+
+// Carousel Animation
+function initializeCarousel() {
+    const carouselTrack = document.querySelector('.carousel-track');
+    if (!carouselTrack) return;
+    
+    // Pause animation on hover
+    carouselTrack.addEventListener('mouseenter', () => {
+        carouselTrack.style.animationPlayState = 'paused';
+    });
+    
+    carouselTrack.addEventListener('mouseleave', () => {
+        carouselTrack.style.animationPlayState = 'running';
+    });
+}
+
+// Hero Section Effects
+function initializeHeroEffects() {
+    const heroSection = document.querySelector('.hero');
+    const heroImage = document.querySelector('.hero-image img');
+    
+    if (!heroSection || !heroImage) return;
+    
+    // Create floating elements
+    createFloatingElements(25); // Increased number of elements
+    
+    // Enhanced parallax effect on mouse move
+    heroSection.addEventListener('mousemove', (e) => {
+        const { left, top, width, height } = heroSection.getBoundingClientRect();
+        const x = (e.clientX - left) / width - 0.5;
+        const y = (e.clientY - top) / height - 0.5;
+        
+        // Move hero image with more pronounced effect
+        heroImage.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
+        
+        // Move floating elements in opposite direction for enhanced parallax
+        document.querySelectorAll('.floating-element').forEach((element, index) => {
+            const speed = (index % 5 + 1) * 1.5; // Increased speed multiplier
+            const xMove = x * speed * 15; // Increased movement range
+            const yMove = y * speed * 15;
+            element.style.transform = `translate(${xMove}px, ${yMove}px)`;
+        });
+        
+        // Move tech grid
+        const techGrid = document.querySelector('.tech-grid');
+        if (techGrid) {
+            techGrid.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+        }
+    });
+    
+    // Reset on mouse leave
+    heroSection.addEventListener('mouseleave', () => {
+        heroImage.style.transform = 'translateY(0) scale(1)';
+        document.querySelectorAll('.floating-element').forEach(element => {
+            element.style.transform = 'translate(0, 0)';
+        });
+        
+        const techGrid = document.querySelector('.tech-grid');
+        if (techGrid) {
+            techGrid.style.transform = 'translate(0, 0)';
+        }
+    });
+}
+
+// Create floating elements with enhanced visuals
+function createFloatingElements(count = 20) {
+    const floatingContainer = document.querySelector('.floating-elements');
+    if (!floatingContainer) return;
+    
+    // Clear existing elements
+    floatingContainer.innerHTML = '';
+    
+    // Tech-inspired color palette
+    const colors = [
+        '#00f3ff', // Neon Blue
+        '#b967ff', // Neon Purple
+        '#ff2a6d', // Neon Pink
+        '#05ffa1', // Neon Green
+        '#ffeb3b', // Bright Yellow
+        '#ff9800', // Orange
+        '#e91e63', // Pink
+        '#9c27b0'  // Purple
+    ];
+    
+    for (let i = 0; i < count; i++) {
+        const element = document.createElement('div');
+        element.classList.add('floating-element');
+        
+        // Random properties with wider range
+        const size = Math.random() * 20 + 8; // 8-28px (larger)
+        const top = Math.random() * 120 - 10; // -10% to 110% (more coverage)
+        const left = Math.random() * 120 - 10;
+        const animationDuration = Math.random() * 6 + 4; // 4-10s (faster)
+        const animationDelay = Math.random() * 5; // 0-5s
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Apply styles
+        element.style.width = `${size}px`;
+        element.style.height = `${size}px`;
+        element.style.top = `${top}%`;
+        element.style.left = `${left}%`;
+        element.style.background = color;
+        element.style.animationDuration = `${animationDuration}s`;
+        element.style.animationDelay = `${animationDelay}s`;
+        element.style.boxShadow = `0 0 20px ${color}, 0 0 40px ${color}`; // Enhanced glow
+        
+        // Add pulsing effect
+        element.style.animation = `float ${animationDuration}s infinite linear`;
+        
+        floatingContainer.appendChild(element);
+    }
+}
+
+// Initialize enhanced hover effects
+function initializeHoverEffects() {
+    // Service cards ripple effect
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            ripple.style.width = '0';
+            ripple.style.height = '0';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
+            ripple.style.transform = 'translate(-50%, -50%)';
+            ripple.style.transition = 'all 0.6s ease';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.style.width = '300px';
+                ripple.style.height = '300px';
+                ripple.style.opacity = '0';
+            }, 10);
+            
+            setTimeout(() => {
+                if (ripple.parentNode === this) {
+                    this.removeChild(ripple);
+                }
+            }, 600);
+        });
+    });
+    
+    // Stat cards number pulse effect
+    document.querySelectorAll('.stat-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const number = this.querySelector('.stat-number');
+            if (number) {
+                number.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    number.style.transform = 'scale(1)';
+                }, 300);
             }
         });
-    }, { threshold: 0.5 });
+    });
     
-    counters.forEach(counter => observer.observe(counter));
+    // Button magnetic effect
+    document.querySelectorAll('.cta-button, .submit-button').forEach(button => {
+        button.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const deltaX = (x - centerX) / centerX;
+            const deltaY = (y - centerY) / centerY;
+            
+            this.style.transform = `translate(${deltaX * 5}px, ${deltaY * 5}px)`;
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translate(0, 0)';
+        });
+    });
 }
 
-function animateCounter(counter) {
-    const target = parseInt(counter.getAttribute('data-target'));
-    const duration = 2000;
-    const step = target / (duration / 16);
-    let current = 0;
-    
-    const timer = setInterval(() => {
-        current += step;
-        if (current >= target) {
-            current = target;
-            clearInterval(timer);
+// Form submission
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(this);
+        const name = formData.get('name') || this.querySelector('input[type="text"]').value;
+        const email = formData.get('email') || this.querySelector('input[type="email"]').value;
+        const message = formData.get('message') || this.querySelector('textarea').value;
+        
+        // Simple validation
+        if (!name || !email || !message) {
+            alert('Please fill in all fields');
+            return;
         }
-        counter.textContent = Math.floor(current);
-    }, 16);
+        
+        // In a real application, you would send this data to a server
+        console.log('Form submitted:', { name, email, message });
+        
+        // Show success message with animation
+        const submitButton = this.querySelector('.submit-button');
+        const originalText = submitButton.querySelector('span').textContent;
+        
+        submitButton.querySelector('span').textContent = 'Message Sent!';
+        submitButton.style.background = 'var(--neon-green)';
+        
+        setTimeout(() => {
+            submitButton.querySelector('span').textContent = originalText;
+            submitButton.style.background = '';
+        }, 3000);
+        
+        // Reset form
+        this.reset();
+    });
 }
 
-// Client Carousel
-function initializeCarousel() {
-    const track = document.querySelector('.carousel-track');
-    if (!track) return;
-    
-    // Pause on hover
-    track.addEventListener('mouseenter', () => {
-        track.style.animationPlayState = 'paused';
-    });
-    
-    track.addEventListener('mouseleave', () => {
-        track.style.animationPlayState = 'running';
-    });
-}
-
-// Add loading state
+// Add loading state with enhanced animation
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
+    
+    // Add subtle pulse to important elements
+    setInterval(() => {
+        document.querySelectorAll('.service-icon, .contact-icon').forEach(icon => {
+            icon.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                icon.style.transform = 'scale(1)';
+            }, 300);
+        });
+    }, 5000);
 });
