@@ -1,405 +1,310 @@
-// Initialize everything when DOM is loaded
+// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initializeScrollAnimations();
-    initializeCounterAnimations();
-    initializeCarousel();
-    initializeMobileMenu();
-    initializeHeroEffects();
-    initializeHoverEffects();
+    // Initialize all functionality
+    initAnimations();
+    initFloatingElements();
+    initCounterAnimation();
+    initMobileMenu();
+    initScrollEffects();
+    initServiceCardInteractions();
 });
 
-// Mobile Menu Toggle
-function initializeMobileMenu() {
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileMenuToggle.classList.toggle('active');
-        });
-        
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.classList.remove('active');
-            });
-        });
-    }
-}
-
-// Scroll Animations
-function initializeScrollAnimations() {
+// Initialize scroll animations
+function initAnimations() {
     const observerOptions = {
-        threshold: 0.05,
+        threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                
-                // For counter elements, start counting when they become visible
-                if (entry.target.classList.contains('stat-number')) {
-                    animateCounter(entry.target);
-                }
             }
         });
     }, observerOptions);
-    
-    // Observe elements with animation classes
-    document.querySelectorAll('.fade-in, .slide-up, .zoom-in').forEach(el => {
+
+    // Observe all elements with animation classes
+    document.querySelectorAll('.fade-in, .slide-up').forEach(el => {
         observer.observe(el);
-    });
-    
-    // Observe counter elements
-    document.querySelectorAll('.stat-number').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Observe service cards
-    document.querySelectorAll('.service-card').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Observe about image
-    document.querySelectorAll('.image-container').forEach(el => {
-        observer.observe(el);
-    });
-    
-    // Smooth scrolling for navigation links (ONLY for hash links)
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            // Only prevent default for actual hash links (not external links)
-            if (this.getAttribute('href').startsWith('#') && this.getAttribute('href').length > 1) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
-    
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 100) {
-            header.style.background = 'rgba(255, 255, 255, 0.97)';
-            header.style.backdropFilter = 'blur(10px)';
-            header.style.padding = '0.5rem 0';
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            header.style.background = 'var(--bg-light)';
-            header.style.backdropFilter = 'none';
-            header.style.padding = '1rem 0';
-            header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-        }
     });
 }
 
-// Counter Animation
-function initializeCounterAnimations() {
-    // This will be triggered by the scroll observer
-}
-
-function animateCounter(element) {
-    const target = parseInt(element.getAttribute('data-target'));
-    const duration = 1500; // 1.5 seconds (faster)
-    const frameDuration = 1000 / 60; // 60fps
-    const totalFrames = Math.round(duration / frameDuration);
-    let frame = 0;
-    
-    // Check if already animated
-    if (element.classList.contains('animated')) return;
-    element.classList.add('animated');
-    
-    const counter = setInterval(() => {
-        frame++;
-        const progress = frame / totalFrames;
-        // Use easing function for more natural animation
-        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        const currentCount = Math.round(target * easeOutQuart);
-        
-        element.textContent = currentCount;
-        
-        if (frame === totalFrames) {
-            clearInterval(counter);
-            element.textContent = target;
-        }
-    }, frameDuration);
-}
-
-// Carousel Animation
-function initializeCarousel() {
-    const carouselTrack = document.querySelector('.carousel-track');
-    if (!carouselTrack) return;
-    
-    // Pause animation on hover
-    carouselTrack.addEventListener('mouseenter', () => {
-        carouselTrack.style.animationPlayState = 'paused';
-    });
-    
-    carouselTrack.addEventListener('mouseleave', () => {
-        carouselTrack.style.animationPlayState = 'running';
-    });
-}
-
-// Hero Section Effects
-function initializeHeroEffects() {
-    const heroSection = document.querySelector('.hero');
-    const heroImage = document.querySelector('.hero-image img');
-    
-    if (!heroSection || !heroImage) return;
+// Initialize floating elements in hero section
+function initFloatingElements() {
+    const floatingContainer = document.querySelector('.floating-elements');
+    const colors = ['#00f3ff', '#b967ff', '#ff2a6d', '#05ffa1'];
+    const shapes = ['circle', 'square', 'triangle'];
     
     // Create floating elements
-    createFloatingElements(25); // Increased number of elements
-    
-    // Enhanced parallax effect on mouse move
-    heroSection.addEventListener('mousemove', (e) => {
-        const { left, top, width, height } = heroSection.getBoundingClientRect();
-        const x = (e.clientX - left) / width - 0.5;
-        const y = (e.clientY - top) / height - 0.5;
-        
-        // Move hero image with more pronounced effect
-        heroImage.style.transform = `translate(${x * 20}px, ${y * 20}px) scale(1.05)`;
-        
-        // Move floating elements in opposite direction for enhanced parallax
-        document.querySelectorAll('.floating-element').forEach((element, index) => {
-            const speed = (index % 5 + 1) * 1.5; // Increased speed multiplier
-            const xMove = x * speed * 15; // Increased movement range
-            const yMove = y * speed * 15;
-            element.style.transform = `translate(${xMove}px, ${yMove}px)`;
-        });
-        
-        // Move tech grid
-        const techGrid = document.querySelector('.tech-grid');
-        if (techGrid) {
-            techGrid.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
-        }
-    });
-    
-    // Reset on mouse leave
-    heroSection.addEventListener('mouseleave', () => {
-        heroImage.style.transform = 'translateY(0) scale(1)';
-        document.querySelectorAll('.floating-element').forEach(element => {
-            element.style.transform = 'translate(0, 0)';
-        });
-        
-        const techGrid = document.querySelector('.tech-grid');
-        if (techGrid) {
-            techGrid.style.transform = 'translate(0, 0)';
-        }
-    });
-}
-
-// Create floating elements with enhanced visuals
-function createFloatingElements(count = 20) {
-    const floatingContainer = document.querySelector('.floating-elements');
-    if (!floatingContainer) return;
-    
-    // Clear existing elements
-    floatingContainer.innerHTML = '';
-    
-    // Tech-inspired color palette
-    const colors = [
-        '#00f3ff', // Neon Blue
-        '#b967ff', // Neon Purple
-        '#ff2a6d', // Neon Pink
-        '#05ffa1', // Neon Green
-        '#ffeb3b', // Bright Yellow
-        '#ff9800', // Orange
-        '#e91e63', // Pink
-        '#9c27b0'  // Purple
-    ];
-    
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < 15; i++) {
         const element = document.createElement('div');
-        element.classList.add('floating-element');
+        element.className = 'floating-element';
         
-        // Random properties with wider range
-        const size = Math.random() * 20 + 8; // 8-28px (larger)
-        const top = Math.random() * 120 - 10; // -10% to 110% (more coverage)
-        const left = Math.random() * 120 - 10;
-        const animationDuration = Math.random() * 6 + 4; // 4-10s (faster)
-        const animationDelay = Math.random() * 5; // 0-5s
+        // Random properties
+        const size = Math.random() * 20 + 5;
         const color = colors[Math.floor(Math.random() * colors.length)];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 5;
+        
+        // Position randomly
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
         
         // Apply styles
         element.style.width = `${size}px`;
         element.style.height = `${size}px`;
-        element.style.top = `${top}%`;
-        element.style.left = `${left}%`;
         element.style.background = color;
-        element.style.animationDuration = `${animationDuration}s`;
-        element.style.animationDelay = `${animationDelay}s`;
-        element.style.boxShadow = `0 0 20px ${color}, 0 0 40px ${color}`; // Enhanced glow
+        element.style.left = `${left}%`;
+        element.style.top = `${top}%`;
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${delay}s`;
         
-        // Add pulsing effect
-        element.style.animation = `float ${animationDuration}s infinite linear`;
+        // Shape variations
+        if (shape === 'square') {
+            element.style.borderRadius = '3px';
+        } else if (shape === 'triangle') {
+            element.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+            element.style.background = 'transparent';
+            element.style.borderLeft = `${size/2}px solid transparent`;
+            element.style.borderRight = `${size/2}px solid transparent`;
+            element.style.borderBottom = `${size}px solid ${color}`;
+            element.style.width = '0';
+            element.style.height = '0';
+        }
         
         floatingContainer.appendChild(element);
     }
 }
 
-// Initialize enhanced hover effects - FIXED VERSION
-function initializeHoverEffects() {
-    // Service cards ripple effect - FIXED to not interfere with links
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mouseenter', function(e) {
-            // Don't create ripple if clicking on a link
-            if (e.target.closest('a')) return;
-            
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const ripple = document.createElement('div');
-            ripple.style.position = 'absolute';
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            ripple.style.width = '0';
-            ripple.style.height = '0';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(255, 255, 255, 0.6)';
-            ripple.style.transform = 'translate(-50%, -50%)';
-            ripple.style.transition = 'all 0.6s ease';
-            ripple.style.pointerEvents = 'none'; // Important: don't interfere with clicks
-            ripple.style.zIndex = '1';
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.style.width = '300px';
-                ripple.style.height = '300px';
-                ripple.style.opacity = '0';
-            }, 10);
-            
-            setTimeout(() => {
-                if (ripple.parentNode === this) {
-                    this.removeChild(ripple);
-                }
-            }, 600);
-        });
-    });
-    
-    // Stat cards number pulse effect
-    document.querySelectorAll('.stat-card').forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            const number = this.querySelector('.stat-number');
-            if (number) {
-                number.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    number.style.transform = 'scale(1)';
-                }, 300);
+// Initialize counter animation for impact stats
+function initCounterAnimation() {
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    animateCounter(counter);
+                });
+                observer.unobserve(entry.target);
             }
         });
+    }, observerOptions);
+
+    const impactSection = document.querySelector('.impact-section');
+    if (impactSection) {
+        observer.observe(impactSection);
+    }
+}
+
+// Animate counter from 0 to target value
+function animateCounter(counter) {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const duration = 2000; // 2 seconds
+    const frameDuration = 1000 / 60; // 60 fps
+    const totalFrames = Math.round(duration / frameDuration);
+    let frame = 0;
+
+    const counterAnimation = setInterval(() => {
+        frame++;
+        const progress = frame / totalFrames;
+        const current = Math.round(target * progress);
+
+        counter.textContent = current;
+
+        if (frame === totalFrames) {
+            clearInterval(counterAnimation);
+            counter.textContent = target;
+        }
+    }, frameDuration);
+}
+
+// Initialize mobile menu functionality
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            mobileMenuToggle.textContent = navLinks.style.display === 'flex' ? '✕' : '☰';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                    mobileMenuToggle.textContent = '☰';
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+            } else {
+                navLinks.style.display = 'none';
+                mobileMenuToggle.textContent = '☰';
+            }
+        });
+    }
+}
+
+// Initialize scroll effects
+function initScrollEffects() {
+    let lastScrollY = window.scrollY;
+    const header = document.querySelector('.header');
+
+    window.addEventListener('scroll', () => {
+        // Header background on scroll
+        if (window.scrollY > 100) {
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.background = 'var(--bg-light)';
+            header.style.backdropFilter = 'none';
+        }
+
+        // Parallax effect for hero elements
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero-image, .floating-elements');
+        
+        parallaxElements.forEach(el => {
+            const speed = el.classList.contains('hero-image') ? 0.5 : 0.3;
+            el.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+
+        lastScrollY = window.scrollY;
     });
+}
+
+// Initialize service card interactions
+function initServiceCardInteractions() {
+    const serviceCards = document.querySelectorAll('.service-card');
     
-    // Button magnetic effect - ONLY for actual buttons, not links
-    document.querySelectorAll('.cta-button, .submit-button').forEach(button => {
-        if (button.tagName === 'BUTTON') { // Only apply to actual button elements
-            button.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const deltaX = (x - centerX) / centerX;
-                const deltaY = (y - centerY) / centerY;
-                
-                this.style.transform = `translate(${deltaX * 5}px, ${deltaY * 5}px)`;
-            });
-            
-            button.addEventListener('mouseleave', function() {
-                this.style.transform = 'translate(0, 0)';
-            });
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'translateY(0)';
+        });
+        
+        // Ensure learn more buttons are always accessible
+        const learnMoreBtn = card.querySelector('.learn-more-btn');
+        if (learnMoreBtn) {
+            learnMoreBtn.style.opacity = '1';
+            learnMoreBtn.style.visibility = 'visible';
+            learnMoreBtn.style.pointerEvents = 'auto';
         }
     });
 }
 
-// REMOVED: The problematic service card button animation code
-// This was causing issues with the learn more links
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
 
-// Form submission - FIXED to be more specific
+// Form submission handling
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data more reliably
-        const nameInput = this.querySelector('input[type="text"]');
-        const emailInput = this.querySelector('input[type="email"]');
-        const messageInput = this.querySelector('textarea');
-        
-        const name = nameInput ? nameInput.value : '';
-        const email = emailInput ? emailInput.value : '';
-        const message = messageInput ? messageInput.value : '';
+        // Get form data
+        const formData = new FormData(this);
+        const name = formData.get('name') || this.querySelector('input[type="text"]').value;
+        const email = formData.get('email') || this.querySelector('input[type="email"]').value;
+        const message = formData.get('message') || this.querySelector('textarea').value;
         
         // Simple validation
         if (!name || !email || !message) {
-            alert('Please fill in all fields');
+            alert('Please fill in all fields.');
             return;
         }
         
-        // In a real application, you would send this data to a server
-        console.log('Form submitted:', { name, email, message });
-        
-        // Show success message with animation
+        // Simulate form submission
         const submitButton = this.querySelector('.submit-button');
-        if (submitButton) {
-            const originalText = submitButton.querySelector('span').textContent;
-            
-            submitButton.querySelector('span').textContent = 'Message Sent!';
-            submitButton.style.background = 'var(--neon-green)';
-            
-            setTimeout(() => {
-                submitButton.querySelector('span').textContent = originalText;
-                submitButton.style.background = '';
-            }, 3000);
-        }
+        const originalText = submitButton.querySelector('span').textContent;
         
-        // Reset form
-        this.reset();
+        submitButton.querySelector('span').textContent = 'Sending...';
+        submitButton.disabled = true;
+        
+        setTimeout(() => {
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+            submitButton.querySelector('span').textContent = originalText;
+            submitButton.disabled = false;
+        }, 2000);
     });
 }
 
-// Add loading state with enhanced animation
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
+// Enhanced dropdown functionality for mobile
+function initDropdowns() {
+    const dropdowns = document.querySelectorAll('.nav-dropdown');
     
-    // Add subtle pulse to important elements
-    setInterval(() => {
-        document.querySelectorAll('.service-icon, .contact-icon').forEach(icon => {
-            icon.style.transform = 'scale(1.1)';
-            setTimeout(() => {
-                icon.style.transform = 'scale(1)';
-            }, 300);
+    dropdowns.forEach(dropdown => {
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        
+        toggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            }
         });
-    }, 5000);
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+}
+
+// Initialize dropdowns
+initDropdowns();
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
 });
 
-// Add explicit click handler for learn more buttons to ensure they work
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure learn more buttons work
-    document.querySelectorAll('.learn-more-btn').forEach(button => {
-        button.addEventListener('click', function(e) {
-            // Let the link work normally - don't prevent default
-            console.log('Learn More clicked:', this.href);
-        });
-        
-        // Make sure buttons are properly styled and clickable
-        button.style.pointerEvents = 'auto';
-        button.style.cursor = 'pointer';
-    });
-});
+// Performance optimization: Throttle scroll events
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
+}
+
+// Apply throttling to scroll events
+window.addEventListener('scroll', throttle(() => {
+    // Scroll-related functions here
+}, 100));
