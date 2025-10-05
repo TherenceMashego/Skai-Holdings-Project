@@ -1,4 +1,3 @@
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeScrollAnimations();
@@ -70,19 +69,22 @@ function initializeScrollAnimations() {
         observer.observe(el);
     });
     
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links (ONLY for hash links)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+            // Only prevent default for actual hash links (not external links)
+            if (this.getAttribute('href').startsWith('#') && this.getAttribute('href').length > 1) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
@@ -248,11 +250,14 @@ function createFloatingElements(count = 20) {
     }
 }
 
-// Initialize enhanced hover effects
+// Initialize enhanced hover effects - FIXED VERSION
 function initializeHoverEffects() {
-    // Service cards ripple effect
+    // Service cards ripple effect - FIXED to not interfere with links
     document.querySelectorAll('.service-card').forEach(card => {
         card.addEventListener('mouseenter', function(e) {
+            // Don't create ripple if clicking on a link
+            if (e.target.closest('a')) return;
+            
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -267,6 +272,8 @@ function initializeHoverEffects() {
             ripple.style.background = 'rgba(255, 255, 255, 0.6)';
             ripple.style.transform = 'translate(-50%, -50%)';
             ripple.style.transition = 'all 0.6s ease';
+            ripple.style.pointerEvents = 'none'; // Important: don't interfere with clicks
+            ripple.style.zIndex = '1';
             
             this.appendChild(ripple);
             
@@ -297,39 +304,47 @@ function initializeHoverEffects() {
         });
     });
     
-    // Button magnetic effect
+    // Button magnetic effect - ONLY for actual buttons, not links
     document.querySelectorAll('.cta-button, .submit-button').forEach(button => {
-        button.addEventListener('mousemove', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+        if (button.tagName === 'BUTTON') { // Only apply to actual button elements
+            button.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const deltaX = (x - centerX) / centerX;
+                const deltaY = (y - centerY) / centerY;
+                
+                this.style.transform = `translate(${deltaX * 5}px, ${deltaY * 5}px)`;
+            });
             
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const deltaX = (x - centerX) / centerX;
-            const deltaY = (y - centerY) / centerY;
-            
-            this.style.transform = `translate(${deltaX * 5}px, ${deltaY * 5}px)`;
-        });
-        
-        button.addEventListener('mouseleave', function() {
-            this.style.transform = 'translate(0, 0)';
-        });
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translate(0, 0)';
+            });
+        }
     });
 }
 
-// Form submission
+// REMOVED: The problematic service card button animation code
+// This was causing issues with the learn more links
+
+// Form submission - FIXED to be more specific
 const contactForm = document.querySelector('.contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name') || this.querySelector('input[type="text"]').value;
-        const email = formData.get('email') || this.querySelector('input[type="email"]').value;
-        const message = formData.get('message') || this.querySelector('textarea').value;
+        // Get form data more reliably
+        const nameInput = this.querySelector('input[type="text"]');
+        const emailInput = this.querySelector('input[type="email"]');
+        const messageInput = this.querySelector('textarea');
+        
+        const name = nameInput ? nameInput.value : '';
+        const email = emailInput ? emailInput.value : '';
+        const message = messageInput ? messageInput.value : '';
         
         // Simple validation
         if (!name || !email || !message) {
@@ -342,15 +357,17 @@ if (contactForm) {
         
         // Show success message with animation
         const submitButton = this.querySelector('.submit-button');
-        const originalText = submitButton.querySelector('span').textContent;
-        
-        submitButton.querySelector('span').textContent = 'Message Sent!';
-        submitButton.style.background = 'var(--neon-green)';
-        
-        setTimeout(() => {
-            submitButton.querySelector('span').textContent = originalText;
-            submitButton.style.background = '';
-        }, 3000);
+        if (submitButton) {
+            const originalText = submitButton.querySelector('span').textContent;
+            
+            submitButton.querySelector('span').textContent = 'Message Sent!';
+            submitButton.style.background = 'var(--neon-green)';
+            
+            setTimeout(() => {
+                submitButton.querySelector('span').textContent = originalText;
+                submitButton.style.background = '';
+            }, 3000);
+        }
         
         // Reset form
         this.reset();
@@ -370,4 +387,19 @@ window.addEventListener('load', function() {
             }, 300);
         });
     }, 5000);
+});
+
+// Add explicit click handler for learn more buttons to ensure they work
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure learn more buttons work
+    document.querySelectorAll('.learn-more-btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Let the link work normally - don't prevent default
+            console.log('Learn More clicked:', this.href);
+        });
+        
+        // Make sure buttons are properly styled and clickable
+        button.style.pointerEvents = 'auto';
+        button.style.cursor = 'pointer';
+    });
 });
