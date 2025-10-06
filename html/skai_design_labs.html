@@ -3,39 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKAI DESIGN LABS - Experience Engineered</title>
-    <link rel="stylesheet" href="../css/home_styling.css">
+    <title>SKAI DESIGN LABS - Human-Centered Design Solutions</title>
+    <link rel="stylesheet" href="../css/skai_design_labs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="logo">
                 <img src="../assets/logo.png" alt="SKAI HOLDINGS Logo">
                 <span class="logo-text">SKAI HOLDINGS</span>
             </div>
-            <a href="../index.html" class="nav-link">← Back to Home</a>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li class="nav-dropdown">
+                    <a href="../index.html#services" class="nav-link dropdown-toggle">
+                        Services <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="skai_technology.html" class="dropdown-link">SKAI TECHNOLOGY</a></li>
+                        <li><a href="skai_design_labs.html" class="dropdown-link">SKAI DESIGN LABS</a></li>
+                        <li><a href="skai_game_labs.html" class="dropdown-link">SKAI GAME LABS</a></li>
+                        <li><a href="skai_management_advisory.html" class="dropdown-link">SKAI MANAGEMENT & ADVISORY</a></li>
+                        <li><a href="uthando_africa.html" class="dropdown-link">UTHANDO AFRICA</a></li>
+                    </ul>
+                </li>
+                <li><a href="../index.html#impact" class="nav-link">Impact</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">☰</button>
         </nav>
     </header>
 
-    <section class="about-section">
+    <!-- Hero Section -->
+    <section class="design-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">SKAI DESIGN LABS</h1>
+                <p class="hero-subtitle">Crafting exceptional human-centered experiences</p>
+                <div class="design-stats">
+                    <div class="stat">
+                        <div class="stat-number">200+</div>
+                        <div class="stat-label">Design Projects</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Brands Transformed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="design-elements">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Design Services -->
+    <section class="design-services">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-title">SKAI DESIGN LABS</h1>
-                <p class="section-subtitle">Experience Engineered. Intelligence Applied.</p>
+                <h2>Our Design Services</h2>
+                <p>Transforming complex challenges into meaningful solutions</p>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>We transform complex challenges into meaningful, human-centered solutions. Our design consultancy specializes in crafting exceptional experiences for your customers, employees, and patients across every touchpoint.</p>
-                    <h3>Core Services:</h3>
-                    <ul>
-                        <li>CX/UX/UI Design</li>
-                        <li>Service Design</li>
-                        <li>Design Thinking</li>
+            <div class="services-grid">
+                <div class="design-service">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>UX/UI Design</h3>
+                    <p>Creating intuitive and engaging digital experiences that users love.</p>
+                    <ul class="service-features">
+                        <li>User Research</li>
+                        <li>Wireframing</li>
+                        <li>Prototyping</li>
+                        <li>Visual Design</li>
+                    </ul>
+                </div>
+                <div class="design-service">
+                    <div class="service-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Service Design</h3>
+                    <p>Designing end-to-end service experiences across all touchpoints.</p>
+                    <ul class="service-features">
                         <li>Customer Journey Mapping</li>
+                        <li>Service Blueprinting</li>
+                        <li>Experience Strategy</li>
+                        <li>Process Optimization</li>
+                    </ul>
+                </div>
+                <div class="design-service">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Design Thinking</h3>
+                    <p>Human-centered approach to innovation and problem-solving.</p>
+                    <ul class="service-features">
+                        <li>Workshop Facilitation</li>
+                        <li>Ideation Sessions</li>
+                        <li>Prototype Testing</li>
+                        <li>Innovation Strategy</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Design Process -->
+    <section class="design-process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Design Process</h2>
+                <p>A structured approach to delivering exceptional design solutions</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Discover</h3>
+                    <p>Research and understand user needs, business goals, and market context.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>Define</h3>
+                    <p>Synthesize insights and define clear problem statements and opportunities.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Design</h3>
+                    <p>Create and iterate on solutions through prototyping and testing.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h3>Deliver</h3>
+                    <p>Implement and refine the final solution with development teams.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Showcase -->
+    <section class="portfolio-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2>Design Excellence</h2>
+                <p>Showcasing our commitment to quality and innovation</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <h4>Financial App Redesign</h4>
+                    <p>Mobile banking experience transformation</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <h4>E-commerce Platform</h4>
+                    <p>End-to-end customer journey optimization</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <h4>Healthcare Portal</h4>
+                    <p>Patient experience digital transformation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="design-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Create Exceptional Experiences?</h2>
+                <p>Let's collaborate to design solutions that delight your users and drive business results.</p>
+                <a href="../index.html#contact" class="cta-button">Start Your Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="../assets/logo_footer.png" alt="SKAI HOLDINGS Footer Logo">
+                    </div>
+                    <p>Your premier partner for intelligent digital solutions, AI innovation, and cutting-edge technology services in Johannesburg and beyond.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#impact">Impact</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-menu">
+                        <li><a href="skai_technology.html">SKAI TECHNOLOGY</a></li>
+                        <li><a href="skai_design_labs.html">SKAI DESIGN LABS</a></li>
+                        <li><a href="skai_game_labs.html">SKAI GAME LABS</a></li>
+                        <li><a href="skai_management_advisory.html">SKAI MANAGEMENT & ADVISORY</a></li>
+                        <li><a href="uthando_africa.html">UTHANDO AFRICA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>hello@skai.co.za</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+27 XXX XXX XXXX</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Sandton, Johannesburg</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Terrence Mashego. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/skai_design_labs.js"></script>
 </body>
 </html>

@@ -3,39 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKAI GAME LABS - Next-Gen Play</title>
-    <link rel="stylesheet" href="../css/home_styling.css">
+    <title>SKAI GAME LABS - Immersive Gaming Experiences</title>
+    <link rel="stylesheet" href="../css/skai_game_labs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <nav class="nav">
             <div class="logo">
                 <img src="../assets/logo.png" alt="SKAI HOLDINGS Logo">
                 <span class="logo-text">SKAI HOLDINGS</span>
             </div>
-            <a href="../index.html" class="nav-link">← Back to Home</a>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li class="nav-dropdown">
+                    <a href="../index.html#services" class="nav-link dropdown-toggle">
+                        Services <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="skai_technology.html" class="dropdown-link">SKAI TECHNOLOGY</a></li>
+                        <li><a href="skai_design_labs.html" class="dropdown-link">SKAI DESIGN LABS</a></li>
+                        <li><a href="skai_game_labs.html" class="dropdown-link">SKAI GAME LABS</a></li>
+                        <li><a href="skai_management_advisory.html" class="dropdown-link">SKAI MANAGEMENT & ADVISORY</a></li>
+                        <li><a href="uthando_africa.html" class="dropdown-link">UTHANDO AFRICA</a></li>
+                    </ul>
+                </li>
+                <li><a href="../index.html#impact" class="nav-link">Impact</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle">☰</button>
         </nav>
     </header>
 
-    <section class="about-section">
+    <!-- Hero Section -->
+    <section class="game-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">SKAI GAME LABS</h1>
+                <p class="hero-subtitle">Building immersive worlds and captivating gaming experiences</p>
+                <div class="game-stats">
+                    <div class="stat">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Games Developed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">10M+</div>
+                        <div class="stat-label">Players Worldwide</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4.8★</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game-elements">
+            <div class="pixel-particle"></div>
+            <div class="pixel-particle"></div>
+            <div class="pixel-particle"></div>
+        </div>
+    </section>
+
+    <!-- Game Services -->
+    <section class="game-services">
         <div class="container">
             <div class="section-header">
-                <h1 class="section-title">SKAI GAME LABS</h1>
-                <p class="section-subtitle">Next-Gen Play, Experience Engineered</p>
+                <h2>Our Game Development Services</h2>
+                <p>From concept to launch and beyond</p>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>We don't just develop games—we build immersive worlds. From concept to code, we create captivating experiences across PC, console, and mobile, driven by a gamer's passion and precision.</p>
-                    <h3>Core Services:</h3>
-                    <ul>
-                        <li>Full-Cycle Game Development</li>
+            <div class="services-grid">
+                <div class="game-service">
+                    <div class="service-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Full-Cycle Development</h3>
+                    <p>End-to-end game development from initial concept to final release.</p>
+                    <ul class="service-features">
+                        <li>Concept Development</li>
+                        <li>Game Design</li>
+                        <li>Art & Animation</li>
+                        <li>Programming</li>
+                        <li>QA Testing</li>
+                    </ul>
+                </div>
+                <div class="game-service">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Game Development</h3>
+                    <p>Creating engaging mobile experiences for iOS and Android platforms.</p>
+                    <ul class="service-features">
+                        <li>iOS & Android Development</li>
+                        <li>Cross-Platform Solutions</li>
+                        <li>Mobile Optimization</li>
+                        <li>App Store Publishing</li>
+                    </ul>
+                </div>
+                <div class="game-service">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>PC & Console Development</h3>
+                    <p>High-quality gaming experiences for PC and console platforms.</p>
+                    <ul class="service-features">
                         <li>Unity & Unreal Engine</li>
-                        <li>Game Publishing</li>
-                        <li>Live Ops</li>
+                        <li>Console Certification</li>
+                        <li>PC Optimization</li>
+                        <li>Multiplayer Integration</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Game Engines -->
+    <section class="game-engines">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Technology Stack</h2>
+                <p>Leveraging industry-leading game engines and tools</p>
+            </div>
+            <div class="engines-grid">
+                <div class="engine-card">
+                    <div class="engine-icon">
+                        <i class="fab fa-unity"></i>
+                    </div>
+                    <h3>Unity</h3>
+                    <p>Cross-platform development for 2D and 3D games</p>
+                </div>
+                <div class="engine-card">
+                    <div class="engine-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>Unreal Engine</h3>
+                    <p>High-fidelity 3D experiences with cutting-edge graphics</p>
+                </div>
+                <div class="engine-card">
+                    <div class="engine-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3>HTML5</h3>
+                    <p>Browser-based games with WebGL and Canvas</p>
+                </div>
+                <div class="engine-card">
+                    <div class="engine-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Backend Services</h3>
+                    <p>Multiplayer, analytics, and live operations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="game-portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Games</h2>
+                <p>Showcasing our passion for creating memorable gaming experiences</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);"></div>
+                    <h4>Cyber Nexus</h4>
+                    <p>Action RPG set in a futuristic cyberpunk world</p>
+                    <div class="game-platforms">
+                        <span>PC</span>
+                        <span>PS5</span>
+                        <span>XBOX</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);"></div>
+                    <h4>Mythic Quest</h4>
+                    <p>Mobile strategy game with deep progression systems</p>
+                    <div class="game-platforms">
+                        <span>iOS</span>
+                        <span>Android</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #fd79a8, #e84393);"></div>
+                    <h4>Pixel Pioneers</h4>
+                    <p>Casual puzzle adventure with retro aesthetics</p>
+                    <div class="game-platforms">
+                        <span>Mobile</span>
+                        <span>Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="game-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Create Your Next Gaming Hit?</h2>
+                <p>Let's collaborate to bring your game vision to life with passion and precision.</p>
+                <a href="../index.html#contact" class="cta-button">Start Your Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img src="../assets/logo_footer.png" alt="SKAI HOLDINGS Footer Logo">
+                    </div>
+                    <p>Your premier partner for intelligent digital solutions, AI innovation, and cutting-edge technology services in Johannesburg and beyond.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-menu">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#about">About Us</a></li>
+                        <li><a href="../index.html#services">Services</a></li>
+                        <li><a href="../index.html#impact">Impact</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-menu">
+                        <li><a href="skai_technology.html">SKAI TECHNOLOGY</a></li>
+                        <li><a href="skai_design_labs.html">SKAI DESIGN LABS</a></li>
+                        <li><a href="skai_game_labs.html">SKAI GAME LABS</a></li>
+                        <li><a href="skai_management_advisory.html">SKAI MANAGEMENT & ADVISORY</a></li>
+                        <li><a href="uthando_africa.html">UTHANDO AFRICA</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>hello@skai.co.za</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+27 XXX XXX XXXX</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Sandton, Johannesburg</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Terrence Mashego. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/skai_game_labs.js"></script>
 </body>
 </html>

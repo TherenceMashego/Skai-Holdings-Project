@@ -435,6 +435,14 @@ section {
     flex-direction: column;
     height: 100%;
     min-height: 460px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+}
+
+.service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .service-card:hover {
@@ -646,7 +654,6 @@ section {
 .stat-card:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(0, 243, 255, 0.3);
 }
 
 .stat-number {
@@ -661,6 +668,7 @@ section {
 
 .stat-label {
     font-size: 1.1rem;
+    font-weight: 500;
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -670,13 +678,13 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(
-        circle at center,
-        rgba(0, 243, 255, 0.1) 0%,
-        transparent 70%
-    );
+    background: linear-gradient(45deg, 
+        transparent, 
+        rgba(0, 243, 255, 0.1), 
+        transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
+    border-radius: 15px;
 }
 
 .stat-card:hover .stat-glow {
@@ -684,10 +692,6 @@ section {
 }
 
 /* Client Carousel */
-.clients-section {
-    background: var(--gray-light);
-}
-
 .client-carousel {
     overflow: hidden;
     position: relative;
@@ -696,31 +700,32 @@ section {
 
 .carousel-track {
     display: flex;
-    gap: 3rem;
     animation: scroll 30s linear infinite;
+    gap: 3rem;
 }
 
 .client-logo {
     flex-shrink: 0;
-    padding: 1.5rem 3rem;
-    background: var(--bg-light);
-    border-radius: 15px;
-    font-weight: 700;
-    font-size: 1.2rem;
+    padding: 1.5rem 2.5rem;
+    background: var(--gray-light);
+    border-radius: 10px;
+    font-weight: 600;
     color: var(--text-dark);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    min-width: 180px;
+    text-align: center;
 }
 
 .client-logo:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    color: var(--primary-blue);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    color: var(--text-light);
 }
 
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-250px * 7)); }
+    100% { transform: translateX(calc(-180px * 9 - 3rem * 9)); }
 }
 
 /* Contact Section */
@@ -738,17 +743,8 @@ section {
 
 .contact-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 1.5rem;
-    background: var(--gray-light);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateX(10px);
-    background: rgba(0, 243, 255, 0.05);
 }
 
 .contact-icon {
@@ -765,12 +761,14 @@ section {
 
 .contact-details h4 {
     font-size: 1.2rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--text-dark);
 }
 
 .contact-details p {
     color: #666;
+    font-size: 1rem;
 }
 
 .contact-form {
@@ -791,6 +789,7 @@ section {
     font-size: 1rem;
     transition: all 0.3s ease;
     background: var(--bg-light);
+    font-family: 'Inter', sans-serif;
 }
 
 .form-input:focus {
@@ -803,8 +802,8 @@ section {
     position: relative;
     background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
     border: none;
-    padding: 1.2rem 2rem;
-    border-radius: 10px;
+    padding: 1rem 2rem;
+    border-radius: 50px;
     color: var(--text-light);
     font-weight: 600;
     font-size: 1.1rem;
@@ -816,20 +815,7 @@ section {
 
 .submit-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 243, 255, 0.3);
-}
-
-.submit-button .button-glow {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.4), 
-        transparent);
-    transition: left 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
 }
 
 .submit-button:hover .button-glow {
@@ -851,24 +837,14 @@ section {
 }
 
 .footer-column h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
     color: var(--text-light);
-    position: relative;
-}
-
-.footer-column h3::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: var(--neon-blue);
 }
 
 .footer-logo img {
-    height: 100px;
+    height: 80px;
     margin-bottom: 1rem;
 }
 
@@ -897,8 +873,8 @@ section {
 }
 
 .social-links a:hover {
-    background: var(--neon-blue);
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+    transform: translateY(-2px);
 }
 
 .footer-menu {
@@ -912,12 +888,11 @@ section {
 .footer-menu a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .footer-menu a:hover {
     color: var(--neon-blue);
-    padding-left: 5px;
 }
 
 .contact-info {
@@ -948,21 +923,37 @@ section {
 .fade-in {
     opacity: 0;
     transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+    animation: fadeInUp 0.8s ease forwards;
 }
 
 .slide-up {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s ease;
+    animation: slideUp 0.8s ease 0.3s forwards;
 }
 
-.slide-up.visible {
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Service Card Fade-in Animation */
+.fade-in-service {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-service.visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -976,15 +967,17 @@ section {
     }
     
     .hero-title {
-        font-size: 2.8rem;
+        font-size: 3rem;
     }
     
-    .services-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
     
     .footer-content {
         grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
 }
 
@@ -998,42 +991,34 @@ section {
     }
     
     .hero-title {
-        font-size: 2.2rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .about-content,
-    .contact-content {
-        grid-template-columns: 1fr;
+        font-size: 2.5rem;
     }
     
     .services-grid {
         grid-template-columns: 1fr;
     }
     
-    .impact-stats {
-        grid-template-columns: repeat(2, 1fr);
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
     
     .footer-content {
         grid-template-columns: 1fr;
     }
+    
+    .impact-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 480px) {
-    .container {
-        padding: 0 1rem;
-    }
-    
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .section-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .impact-stats {
@@ -1041,7 +1026,7 @@ section {
     }
     
     .client-logo {
+        min-width: 150px;
         padding: 1rem 2rem;
-        font-size: 1rem;
     }
 }
