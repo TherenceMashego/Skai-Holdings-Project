@@ -1,636 +1,444 @@
-:root {
-    --primary-blue: #0066cc;
-    --neon-blue: #00f3ff;
-    --neon-purple: #b967ff;
-    --neon-pink: #ff2a6d;
-    --neon-green: #05ffa1;
-    --dark-bg: #0a0a0a;
-    --darker-bg: #050505;
-    --bg-light: #ffffff;
-    --text-dark: #333333;
-    --text-light: #ffffff;
-    --gray-light: #f8f9fa;
-    --gray-dark: #2a2a2a;
-    --business-primary: #2c3e50;
-    --business-secondary: #3498db;
-    --success-color: #27ae60;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background: var(--bg-light);
-    overflow-x: hidden;
-}
-
-/* Header */
-.header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: var(--bg-light);
-    padding: 1rem 0;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transition: all 0.3s ease;
-}
-
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.logo img {
-    height: 40px;
-    width: auto;
-}
-
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    position: relative;
-}
-
-.nav-link:hover {
-    color: var(--primary-blue);
-}
-
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--primary-blue);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-dark);
-}
+/* Management & Advisory Page Specific Styles */
 
 /* Management Hero Section */
 .management-hero {
     position: relative;
-    min-height: 70vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
-    background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
-    color: var(--text-light);
+    justify-content: center;
+    background: linear-gradient(135deg, 
+        rgba(10, 10, 10, 0.9) 0%,
+        rgba(42, 42, 42, 0.8) 50%,
+        rgba(10, 10, 10, 0.9) 100%);
     overflow: hidden;
-    margin-top: 80px;
+    padding-top: 80px;
 }
 
-.hero-content {
-    text-align: center;
-    max-width: 800px;
+.management-hero-container {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
     position: relative;
     z-index: 2;
 }
 
-.hero-title {
+.management-hero-content {
+    color: var(--text-light);
+}
+
+.management-hero-title {
     font-size: 3.5rem;
     font-weight: 800;
+    line-height: 1.2;
     margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.hero-subtitle {
+.management-hero-tagline {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--neon-green);
+    font-style: italic;
+}
+
+.management-hero-subtitle {
     font-size: 1.3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
+    font-weight: 500;
 }
 
-.management-stats {
+.management-hero-description {
+    margin-top: 2rem;
+}
+
+.management-hero-description p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.5rem;
+}
+
+.management-hero-image {
+    position: relative;
     display: flex;
     justify-content: center;
-    gap: 4rem;
-    margin-top: 3rem;
+    align-items: center;
 }
 
-.stat {
-    text-align: center;
+.management-hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-.stat-number {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: var(--success-color);
+.management-hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(
+        circle,
+        rgba(0, 243, 255, 0.2) 0%,
+        rgba(5, 255, 161, 0.1) 30%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    z-index: -1;
+    animation: pulse 3s ease-in-out infinite;
 }
 
-.stat-label {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-}
-
-/* Business Elements */
-.business-elements {
+/* Management Floating Elements */
+.management-floating-elements {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.1;
+    z-index: 1;
 }
 
-.chart-line {
+.management-floating-element {
     position: absolute;
-    top: 20%;
-    left: 10%;
-    width: 200px;
-    height: 100px;
-    border-bottom: 3px solid var(--success-color);
-    border-left: 3px solid var(--success-color);
+    border-radius: 50%;
+    opacity: 0.7;
+    filter: blur(1px);
+    animation: managementFloat linear infinite;
 }
 
-.chart-line::before {
-    content: '';
+@keyframes managementFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(90deg); }
+    50% { transform: translateY(-30px) rotate(180deg); }
+    75% { transform: translateY(-15px) rotate(270deg); }
+}
+
+.management-grid {
     position: absolute;
-    top: 20px;
-    left: 30px;
-    width: 20px;
-    height: 3px;
-    background: var(--success-color);
-    transform: rotate(45deg);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.3;
+    z-index: 1;
 }
 
-.chart-line::after {
-    content: '';
-    position: absolute;
-    top: 50px;
-    left: 80px;
-    width: 20px;
-    height: 3px;
-    background: var(--success-color);
-    transform: rotate(-45deg);
-}
-
-.chart-bar {
-    position: absolute;
-    bottom: 20%;
-    right: 15%;
-    width: 150px;
-    height: 100px;
-    display: flex;
-    align-items: flex-end;
-    gap: 15px;
-}
-
-.chart-bar::before,
-.chart-bar::after {
-    content: '';
-    background: var(--success-color);
-    width: 30px;
-}
-
-.chart-bar::before {
-    height: 60px;
-}
-
-.chart-bar::after {
-    height: 40px;
-}
-
-/* Advisory Services */
-.advisory-services {
+/* Management Consulting Process */
+.management-process {
     padding: 5rem 0;
-    background: var(--gray-light);
+    background: var(--bg-light);
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-}
-
-.section-header p {
-    font-size: 1.2rem;
-    color: #666;
-    max-width: 600px;
+.process-cycle {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.advisory-service {
-    background: var(--bg-light);
-    padding: 2.5rem 2rem;
+.process-step {
+    background: var(--gray-light);
+    padding: 2rem 1.5rem;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid var(--neon-blue);
     transition: all 0.3s ease;
-    border-left: 4px solid var(--business-secondary);
+    position: relative;
 }
 
-.advisory-service:hover {
+.process-step:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-.service-icon {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
     color: var(--text-light);
-    font-size: 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
 }
 
-.advisory-service h3 {
-    font-size: 1.5rem;
+.step-content h3 {
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-dark);
 }
 
-.advisory-service p {
+.step-content p {
     color: #666;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    font-size: 0.9rem;
 }
 
-.service-features {
-    list-style: none;
-    text-align: left;
+/* Management Services Section */
+.management-services-section {
+    padding: 5rem 0;
+    background: var(--gray-light);
 }
 
-.service-features li {
-    padding: 0.5rem 0;
-    color: #666;
+.management-services-section .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
+}
+
+.management-services-section .service-card {
+    min-height: 520px;
+    display: flex;
+    flex-direction: column;
+}
+
+.management-services-section .service-content {
+    flex-grow: 1;
+}
+
+.why-it-matters {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(5, 255, 161, 0.05);
+    border-radius: 10px;
+    border-left: 3px solid var(--neon-green);
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.why-it-matters strong {
+    color: var(--text-dark);
+}
+
+.management-services-section .core-services ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.management-services-section .core-services li {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #666;
 }
 
-.service-features li::before {
-    content: '✓';
+.management-services-section .core-services li:before {
+    content: "•";
+    color: var(--neon-blue);
+    font-weight: bold;
     position: absolute;
     left: 0;
-    color: var(--success-color);
-    font-weight: bold;
 }
 
-/* Approach Section */
-.approach-section {
+/* Additional Management Services */
+.additional-management-services {
     padding: 5rem 0;
     background: var(--bg-light);
 }
 
-.approach-steps {
+.additional-management-services .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 2.5rem;
 }
 
-.approach-step {
-    text-align: center;
-    padding: 2rem;
-    background: var(--gray-light);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-.approach-step:hover {
-    transform: translateY(-5px);
-    background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
-    color: var(--text-light);
-}
-
-.approach-step:hover .step-icon {
-    background: var(--text-light);
-    color: var(--business-primary);
-}
-
-.step-icon {
-    width: 70px;
-    height: 70px;
-    background: var(--business-primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1.5rem;
-    color: var(--text-light);
-    font-size: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.approach-step h3 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.approach-step p {
-    line-height: 1.6;
-}
-
-/* Case Studies */
-.case-studies {
+/* Results & Impact Section */
+.results-impact {
     padding: 5rem 0;
-    background: var(--gray-light);
+    background: linear-gradient(135deg, var(--dark-bg), var(--darker-bg));
+    color: var(--text-light);
 }
 
-.case-grid {
+.results-impact .section-title,
+.results-impact .section-subtitle {
+    color: var(--text-light);
+}
+
+.results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.case-study {
-    background: var(--bg-light);
-    padding: 2rem;
-    border-radius: 15px;
+.result-card {
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
-.case-study:hover {
+.result-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.1);
 }
 
-.case-icon {
+.result-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
     color: var(--text-light);
     font-size: 1.5rem;
 }
 
-.case-study h4 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+.result-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+/* Management CTA Section */
+.management-cta {
+    padding: 5rem 0;
+    background: var(--gray-light);
+    text-align: center;
+}
+
+.management-cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.management-cta-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
     color: var(--text-dark);
 }
 
-.case-study p {
+.management-cta-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
     color: #666;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
 }
 
-.case-metrics {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+/* Active Navigation Link */
+.nav-dropdown .dropdown-link.active {
+    color: var(--primary-blue);
+    background: rgba(0, 243, 255, 0.1);
+    border-left-color: var(--neon-blue);
 }
 
-.case-metrics span {
-    background: var(--success-color);
-    color: var(--text-light);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* CTA Section */
-.management-cta {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, var(--business-primary), var(--business-secondary));
-    color: var(--text-light);
-    text-align: center;
-}
-
-.cta-content h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.cta-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.cta-button {
-    display: inline-block;
-    background: var(--text-light);
-    color: var(--business-primary);
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: all 0.3s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-}
-
-/* Footer */
-.footer {
-    background: var(--dark-bg);
-    color: var(--text-light);
-    padding: 4rem 0 2rem;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.5fr;
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-column h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    color: var(--text-light);
-}
-
-.footer-logo img {
-    height: 40px;
-    margin-bottom: 1rem;
-}
-
-.footer-column p {
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.social-links {
-    display: flex;
-    gap: 1rem;
-}
-
-.social-links a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    color: var(--text-light);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    background: var(--neon-blue);
-    transform: translateY(-3px);
-}
-
-.footer-menu {
-    list-style: none;
-}
-
-.footer-menu li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-menu a {
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.footer-menu a:hover {
-    color: var(--neon-blue);
-    padding-left: 5px;
-}
-
-.contact-info {
-    list-style: none;
-}
-
-.contact-info li {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.contact-info i {
-    color: var(--neon-blue);
-    width: 20px;
-}
-
-.copyright {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* Responsive Design */
+/* Responsive Design for Management & Advisory Page */
 @media (max-width: 1024px) {
-    .footer-content {
-        grid-template-columns: 1fr 1fr;
+    .management-hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
     }
     
-    .management-stats {
-        gap: 2rem;
+    .management-hero-title {
+        font-size: 3rem;
+    }
+    
+    .process-cycle {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .management-services-section .services-grid,
+    .additional-management-services .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-    }
-    
-    .mobile-menu-toggle {
-        display: block;
-    }
-    
-    .hero-title {
+    .management-hero-title {
         font-size: 2.5rem;
     }
     
-    .management-stats {
-        flex-direction: column;
-        gap: 2rem;
+    .management-hero-tagline {
+        font-size: 1.4rem;
     }
     
-    .services-grid {
+    .management-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .management-cta-title {
+        font-size: 2rem;
+    }
+    
+    .process-cycle {
         grid-template-columns: 1fr;
     }
     
-    .footer-content {
-        grid-template-columns: 1fr;
+    .process-step {
+        padding: 1.5rem 1rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-title {
+    .management-hero-title {
         font-size: 2rem;
     }
     
-    .section-header h2 {
-        font-size: 2rem;
+    .management-hero-tagline {
+        font-size: 1.2rem;
     }
     
-    .cta-content h2 {
-        font-size: 2rem;
+    .management-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .management-cta-title {
+        font-size: 1.8rem;
+    }
+    
+    .results-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .result-card {
+        padding: 1.5rem 1rem;
     }
 }
