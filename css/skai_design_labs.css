@@ -60,7 +60,7 @@
 
 .design-hero-subtitle {
     font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    color: var(--gray-dark);
+    color: white; /* CSS color keyword */
     margin-bottom: 2rem;
     line-height: 1.6;
 }
