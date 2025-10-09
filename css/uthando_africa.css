@@ -1,4 +1,4 @@
-/* Enhanced Uthando Africa Page Specific Styles */
+/* Uthando Africa Page Specific Styles */
 
 :root {
     --primary-blue: #2563eb;
@@ -25,31 +25,20 @@
 /* Uthando Africa Hero Section */
 .uthando-hero {
     position: relative;
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, 
-        rgba(37, 99, 235, 0.05) 0%,
-        rgba(255, 255, 255, 0.9) 50%,
-        rgba(37, 99, 235, 0.05) 100%);
+    background: linear-gradient(135deg, var(--primary-blue), var(--blue-dark));
     overflow: hidden;
     padding-top: 80px;
-}
-
-.uthando-hero-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    gap: 4rem;
+    margin-bottom: 0;
 }
 
 .uthando-hero-content {
-    flex: 1;
-    max-width: 600px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
 }
@@ -57,58 +46,40 @@
 .uthando-hero-title {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: var(--primary-blue);
-    line-height: 1.2;
-}
-
-.uthando-hero-tagline {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 600;
-    color: var(--neon-pink);
     margin-bottom: 1rem;
-    font-style: italic;
+    color: var(--white);
+    line-height: 1.2;
 }
 
 .uthando-hero-subtitle {
     font-size: clamp(1.2rem, 2.5vw, 1.4rem);
-    color: var(--gray-dark);
-    margin-bottom: 2rem;
-    line-height: 1.6;
-}
-
-.uthando-hero-description {
+    color: var(--blue-light);
     margin-bottom: 3rem;
-}
-
-.uthando-hero-description p {
-    font-size: 1.1rem;
-    color: var(--gray-medium);
-    line-height: 1.7;
-    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
 .uthando-hero-stats {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 4rem;
-    margin: 3rem 0;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }
 
 .uthando-stat {
-    text-align: left;
+    text-align: center;
 }
 
 .uthando-stat-number {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: var(--primary-blue);
+    color: var(--white);
     margin-bottom: 0.5rem;
 }
 
 .uthando-stat-label {
     font-size: 1rem;
-    color: var(--gray-medium);
+    color: var(--blue-light);
     font-weight: 500;
 }
 
@@ -121,8 +92,8 @@
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 2rem;
-    background: var(--neon-pink);
-    color: var(--white);
+    background: var(--white);
+    color: var(--primary-blue);
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -132,40 +103,9 @@
 }
 
 .uthando-hero-button:hover {
-    background: #e01e5a;
+    background: var(--blue-light);
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
-}
-
-.uthando-hero-image {
-    flex: 1;
-    position: relative;
-    z-index: 2;
-}
-
-.uthando-hero-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-medium);
-}
-
-.uthando-hero-glow {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
-    background: radial-gradient(circle, rgba(255, 42, 109, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity var(--transition-normal);
-    border-radius: inherit;
-    pointer-events: none;
-}
-
-.uthando-hero-image:hover .uthando-hero-glow {
-    opacity: 1;
 }
 
 /* Uthando Floating Elements */
@@ -183,7 +123,6 @@
     position: absolute;
     border-radius: 50%;
     opacity: 0.7;
-    filter: blur(1px);
     animation: uthandoFloat linear infinite;
 }
 
@@ -192,20 +131,6 @@
     25% { transform: translateY(-15px) rotate(90deg); }
     50% { transform: translateY(-30px) rotate(180deg); }
     75% { transform: translateY(-15px) rotate(270deg); }
-}
-
-.uthando-grid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    opacity: 0.3;
-    z-index: 1;
 }
 
 /* Mission & Vision Section */
@@ -217,14 +142,14 @@
 .mission-vision-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
-    max-width: 1000px;
+    gap: 2.5rem;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .mission-card, .vision-card {
     background: var(--white);
-    padding: 3rem 2.5rem;
+    padding: 2.5rem 2rem;
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--shadow-light);
@@ -250,7 +175,6 @@
     justify-content: center;
     color: var(--primary-blue);
     font-size: 2rem;
-    position: relative;
     transition: transform var(--transition-normal);
 }
 
@@ -260,7 +184,7 @@
 }
 
 .mission-card h3, .vision-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-dark);
@@ -269,33 +193,14 @@
 .mission-card p, .vision-card p {
     color: var(--gray-medium);
     line-height: 1.6;
-    font-size: 1.1rem;
 }
 
-/* Core Initiatives Section */
-.uthando-initiatives-section {
+/* Uthando Initiatives Section */
+.uthando-initiatives {
     padding: 5rem 0;
     background: var(--gray-light);
 }
 
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-}
-
-.section-title {
-    font-size: clamp(2rem, 4vw, 2.5rem);
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
-}
-
-.section-subtitle {
-    font-size: clamp(1rem, 2vw, 1.2rem);
-    color: var(--gray-medium);
-}
-
-/* Initiatives Grid */
 .initiatives-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -306,12 +211,10 @@
     background: var(--white);
     padding: 2.5rem 2rem;
     border-radius: 12px;
+    text-align: center;
     box-shadow: var(--shadow-light);
     transition: all var(--transition-normal);
     border-top: 4px solid var(--primary-blue);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
     position: relative;
     overflow: hidden;
 }
@@ -321,24 +224,9 @@
     box-shadow: var(--shadow-heavy);
 }
 
-.step-number {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    opacity: 0.3;
-}
-
-.initiative-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
 .initiative-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     margin: 0 auto 1.5rem;
     background: var(--blue-light);
     border-radius: 50%;
@@ -346,8 +234,7 @@
     align-items: center;
     justify-content: center;
     color: var(--primary-blue);
-    font-size: 1.8rem;
-    position: relative;
+    font-size: 2rem;
     transition: transform var(--transition-normal);
 }
 
@@ -356,34 +243,23 @@
 }
 
 .initiative-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     color: var(--text-dark);
 }
 
-.initiative-content {
-    flex-grow: 1;
-}
-
-.initiative-description {
+.initiative-card p {
     color: var(--gray-medium);
     line-height: 1.6;
     margin-bottom: 1.5rem;
-}
-
-.initiative-focus h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--text-dark);
 }
 
 .service-features {
     list-style: none;
     padding: 0;
     text-align: left;
-    margin: 0;
+    margin: 1.5rem 0 0 0;
 }
 
 .service-features li {
@@ -395,26 +271,83 @@
 }
 
 .service-features li:before {
-    content: "✓";
-    color: var(--primary-blue);
-    font-weight: bold;
+    content: "❤️";
     position: absolute;
     left: 0;
 }
 
-/* Results Section */
-.results-section {
+/* Impact Approach Section */
+.impact-approach {
+    padding: 5rem 0;
+    background: var(--white);
+}
+
+.approach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.approach-card {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-normal);
+    border-top: 4px solid var(--primary-blue);
+}
+
+.approach-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
+}
+
+.approach-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: var(--blue-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 2rem;
+    transition: transform var(--transition-normal);
+}
+
+.approach-card:hover .approach-icon {
+    transform: scale(1.1);
+}
+
+.approach-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.approach-card p {
+    color: var(--gray-medium);
+    line-height: 1.6;
+}
+
+/* Uthando Results Section */
+.uthando-results-section {
     padding: 5rem 0;
     background: linear-gradient(135deg, var(--primary-blue), var(--blue-dark));
     color: var(--text-light);
 }
 
-.results-section .section-title,
-.results-section .section-subtitle {
+.uthando-results-section .section-header h2,
+.uthando-results-section .section-header p {
     color: var(--white);
 }
 
-.results-grid {
+.uthando-results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
@@ -422,7 +355,7 @@
     margin: 0 auto;
 }
 
-.result-item {
+.uthando-result-item {
     text-align: center;
     padding: 2rem 1rem;
     background: rgba(255, 255, 255, 0.1);
@@ -434,12 +367,12 @@
     overflow: hidden;
 }
 
-.result-item:hover {
+.uthando-result-item:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.15);
 }
 
-.result-icon {
+.uthando-result-icon {
     width: 60px;
     height: 60px;
     margin: 0 auto 1rem;
@@ -453,173 +386,32 @@
     transition: transform var(--transition-normal);
 }
 
-.result-item:hover .result-icon {
+.uthando-result-item:hover .uthando-result-icon {
     transform: scale(1.1);
 }
 
-.result-number {
+.uthando-result-number {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 800;
     margin-bottom: 0.5rem;
     color: var(--white);
 }
 
-.result-label {
+.uthando-result-label {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
 }
 
-/* Additional Programs Section */
-.additional-programs {
-    padding: 5rem 0;
-    background: var(--white);
-}
-
-.programs-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
-}
-
-.program-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-light);
-    transition: all var(--transition-normal);
-    border-top: 4px solid var(--neon-pink);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.program-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-heavy);
-}
-
-.program-header {
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.program-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 1.5rem;
-    background: rgba(255, 42, 109, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--neon-pink);
-    font-size: 1.8rem;
-    position: relative;
-    transition: transform var(--transition-normal);
-}
-
-.program-card:hover .program-icon {
-    transform: scale(1.1);
-}
-
-.program-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
-}
-
-.program-content {
-    flex-grow: 1;
-}
-
-.program-content p {
-    color: var(--gray-medium);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.program-focus h4 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--text-dark);
-}
-
-/* Impact & Approach Section */
-.impact-approach {
+/* Get Involved Section */
+.get-involved {
     padding: 5rem 0;
     background: var(--gray-light);
 }
 
-.impact-grid {
+.involvement-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2.5rem;
-}
-
-.impact-card {
-    background: var(--white);
-    padding: 2.5rem 2rem;
-    border-radius: 12px;
-    box-shadow: var(--shadow-light);
-    transition: all var(--transition-normal);
-    border-top: 4px solid var(--neon-green);
-    position: relative;
-    overflow: hidden;
-}
-
-.impact-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-heavy);
-}
-
-.impact-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto 1.5rem;
-    background: rgba(5, 255, 161, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--neon-green);
-    font-size: 1.8rem;
-    position: relative;
-    transition: transform var(--transition-normal);
-}
-
-.impact-card:hover .impact-icon {
-    transform: scale(1.1);
-}
-
-.impact-card h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
-    text-align: center;
-}
-
-.impact-card p {
-    color: var(--gray-medium);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-/* Get Involved Section */
-.get-involved {
-    padding: 5rem 0;
-    background: var(--white);
-}
-
-.involvement-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
     max-width: 1000px;
     margin: 0 auto;
@@ -627,12 +419,12 @@
 
 .involvement-card {
     background: var(--white);
-    padding: 3rem 2rem;
+    padding: 2.5rem 2rem;
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--shadow-light);
     transition: all var(--transition-normal);
-    border-top: 4px solid var(--neon-purple);
+    border-top: 4px solid var(--primary-blue);
     position: relative;
     overflow: hidden;
 }
@@ -646,14 +438,13 @@
     width: 80px;
     height: 80px;
     margin: 0 auto 1.5rem;
-    background: rgba(185, 103, 255, 0.1);
+    background: var(--blue-light);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--neon-purple);
+    color: var(--primary-blue);
     font-size: 2rem;
-    position: relative;
     transition: transform var(--transition-normal);
 }
 
@@ -662,7 +453,7 @@
 }
 
 .involvement-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-dark);
@@ -671,61 +462,15 @@
 .involvement-card p {
     color: var(--gray-medium);
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-.involvement-btn {
+.involvement-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0.75rem 1.5rem;
-    background: var(--neon-purple);
-    color: var(--white);
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: all var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-}
-
-.involvement-btn:hover {
-    background: #9d4edd;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(185, 103, 255, 0.3);
-}
-
-/* Uthando CTA Section */
-.uthando-cta {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
-    text-align: center;
-}
-
-.uthando-cta-content {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.uthando-cta-title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 700;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
-}
-
-.uthando-cta-subtitle {
-    font-size: 1.2rem;
-    color: var(--gray-medium);
-    margin-bottom: 2.5rem;
-}
-
-.cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 2.5rem;
-    background: var(--neon-pink);
+    background: var(--primary-blue);
     color: var(--white);
     text-decoration: none;
     border-radius: 8px;
@@ -735,179 +480,161 @@
     overflow: hidden;
 }
 
-.cta-button:hover {
-    background: #e01e5a;
+.involvement-button:hover {
+    background: var(--blue-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
 
-/* Card Glow Effects */
+/* Uthando CTA Section */
+.uthando-cta {
+    padding: 5rem 0;
+    background: var(--gray-light);
+    text-align: center;
+}
+
+.uthando-cta-content h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.uthando-cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--gray-medium);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.uthando-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--primary-blue);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.uthando-cta-button:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Card Glow Effect */
 .card-glow {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+    background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.1), transparent);
     opacity: 0;
     transition: opacity var(--transition-normal);
     pointer-events: none;
-    border-radius: inherit;
 }
 
-.initiative-card:hover .card-glow,
-.program-card:hover .card-glow,
-.impact-card:hover .card-glow,
-.involvement-card:hover .card-glow,
-.result-item:hover .card-glow,
 .mission-card:hover .card-glow,
-.vision-card:hover .card-glow {
+.vision-card:hover .card-glow,
+.initiative-card:hover .card-glow,
+.approach-card:hover .card-glow,
+.uthando-result-item:hover .card-glow,
+.involvement-card:hover .card-glow {
     opacity: 1;
 }
 
+/* Icon Glow Effect */
 .icon-glow {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(37, 99, 235, 0.2) 0%, transparent 70%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.2), transparent 70%);
     opacity: 0;
     transition: opacity var(--transition-normal);
-    border-radius: 50%;
     pointer-events: none;
 }
 
-.initiative-card:hover .icon-glow,
-.program-card:hover .icon-glow,
-.impact-card:hover .icon-glow,
-.involvement-card:hover .icon-glow,
 .mission-card:hover .icon-glow,
-.vision-card:hover .icon-glow {
+.vision-card:hover .icon-glow,
+.initiative-card:hover .icon-glow {
     opacity: 1;
 }
 
-/* Button Glow Effects */
+/* Button Glow Effect */
 .button-glow {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     opacity: 0;
     transition: opacity var(--transition-normal);
     pointer-events: none;
-    border-radius: inherit;
 }
 
 .uthando-hero-button:hover .button-glow,
-.cta-button:hover .button-glow,
-.involvement-btn:hover .button-glow {
+.involvement-button:hover .button-glow,
+.uthando-cta-button:hover .button-glow {
     opacity: 1;
 }
 
-/* Animation Classes */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-.fade-in-service {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.8s ease forwards;
-}
-
-.slide-up {
-    opacity: 0;
-    transform: translateY(40px);
-    animation: slideUp 0.8s ease forwards;
-    animation-delay: 0.2s;
-}
-
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes slideUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Responsive Design */
-@media (max-width: 992px) {
-    .uthando-hero-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 3rem;
-    }
-    
-    .uthando-hero-stats {
-        justify-content: center;
-        gap: 3rem;
-    }
-    
+@media (max-width: 1024px) {
+    .mission-vision-grid,
     .initiatives-grid,
-    .programs-grid {
+    .approach-grid,
+    .involvement-grid {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
     .uthando-hero-stats {
-        flex-direction: column;
         gap: 2rem;
+        flex-wrap: wrap;
     }
     
-    .uthando-stat {
-        text-align: center;
-    }
-    
-    .mission-vision-grid {
+    .mission-vision-grid,
+    .initiatives-grid,
+    .approach-grid,
+    .involvement-grid {
         grid-template-columns: 1fr;
     }
     
-    .results-grid {
+    .uthando-results-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .impact-grid,
-    .involvement-options {
-        grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 576px) {
-    .initiatives-grid,
-    .programs-grid {
+@media (max-width: 480px) {
+    .uthando-hero-stats {
+        gap: 1.5rem;
+    }
+    
+    .uthando-stat {
+        flex: 1 0 40%;
+    }
+    
+    .uthando-results-grid {
         grid-template-columns: 1fr;
     }
     
-    .results-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .uthando-hero-container {
-        padding: 0 1rem;
-    }
-    
-    .initiative-card,
-    .program-card,
-    .impact-card,
+    .mission-card, .vision-card,
+    .initiative-card, .approach-card,
     .involvement-card {
         padding: 2rem 1.5rem;
-    }
-    
-    .mission-card,
-    .vision-card {
-        padding: 2.5rem 1.5rem;
     }
 }
