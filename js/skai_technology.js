@@ -1,44 +1,54 @@
 // Skai Technology Page JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize page animations and interactions
-    initTechnologyPage();
+    console.log('Initializing Skai Technology Page');
+    
+    // Initialize all components
+    initTechnologyHero();
+    initAnimatedStats();
+    initServiceCards();
+    initScrollAnimations();
+    initFloatingElements();
+    initMobileMenu();
 });
 
-function initTechnologyPage() {
-    // Create floating elements
-    createFloatingElements();
+// Technology Hero Initialization
+function initTechnologyHero() {
+    const heroSection = document.querySelector('.technology-hero');
     
-    // Initialize counter animations
-    initCounters();
+    // Create floating elements for visual interest
+    createTechFloatingElements();
     
-    // Initialize service card animations
-    initServiceCardAnimations();
-    
-    // Initialize scroll animations
-    initScrollAnimations();
-    
-    // Add hover effects to interactive elements
-    initHoverEffects();
+    // Add scroll event listener to keep hero section solid
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+        
+        // Keep hero section solid - no fade effect
+        if (scrollPosition < heroHeight) {
+            heroSection.style.opacity = '1';
+        }
+    });
 }
 
-// Create floating elements for the hero section
-function createFloatingElements() {
-    const container = document.querySelector('.tech-floating-elements');
-    if (!container) return;
+// Create floating elements for hero section
+function createTechFloatingElements() {
+    const floatingContainer = document.querySelector('.tech-floating-elements');
+    if (!floatingContainer) return;
     
-    const colors = ['#2563eb', '#00f3ff', '#05ffa1', '#b967ff', '#ff2a6d'];
-    const shapes = ['circle', 'square', 'triangle'];
+    // Clear any existing elements
+    floatingContainer.innerHTML = '';
     
-    // Create 15 floating elements
-    for (let i = 0; i < 15; i++) {
+    const colors = ['#2563eb', '#1e40af', '#3b82f6', '#60a5fa'];
+    const icons = ['fa-code', 'fa-cloud', 'fa-microchip', 'fa-database', 'fa-mobile', 'fa-robot'];
+    
+    for (let i = 0; i < 12; i++) {
         const element = document.createElement('div');
         element.classList.add('tech-floating-element');
         
         // Random properties
-        const size = Math.random() * 20 + 5;
+        const size = Math.random() * 25 + 10;
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
         const left = Math.random() * 100;
         const top = Math.random() * 100;
         const duration = Math.random() * 20 + 10;
@@ -47,77 +57,79 @@ function createFloatingElements() {
         // Apply styles
         element.style.width = `${size}px`;
         element.style.height = `${size}px`;
-        element.style.backgroundColor = color;
+        element.style.background = color;
         element.style.left = `${left}%`;
         element.style.top = `${top}%`;
         element.style.animationDuration = `${duration}s`;
         element.style.animationDelay = `${delay}s`;
         
-        // Apply shape
-        if (shape === 'square') {
-            element.style.borderRadius = '4px';
-        } else if (shape === 'triangle') {
-            element.style.width = '0';
-            element.style.height = '0';
-            element.style.backgroundColor = 'transparent';
-            element.style.borderLeft = `${size/2}px solid transparent`;
-            element.style.borderRight = `${size/2}px solid transparent`;
-            element.style.borderBottom = `${size}px solid ${color}`;
+        // Add icon for some elements
+        if (Math.random() > 0.7) {
+            const icon = document.createElement('i');
+            icon.classList.add('fas', icons[Math.floor(Math.random() * icons.length)]);
+            icon.style.color = 'white';
+            icon.style.fontSize = `${size * 0.6}px`;
+            icon.style.position = 'absolute';
+            icon.style.top = '50%';
+            icon.style.left = '50%';
+            icon.style.transform = 'translate(-50%, -50%)';
+            element.appendChild(icon);
         }
         
-        container.appendChild(element);
+        floatingContainer.appendChild(element);
     }
 }
 
-// Initialize counter animations for statistics
-function initCounters() {
-    const counters = document.querySelectorAll('.tech-stat-number, .result-number');
+// Animated Statistics Counter
+function initAnimatedStats() {
+    const statElements = document.querySelectorAll('[data-count]');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'));
-                const suffix = counter.textContent.includes('%') ? '%' : 
-                              counter.textContent.includes('+') ? '+' : '';
+                const element = entry.target;
+                const target = parseInt(element.getAttribute('data-count'));
+                const suffix = element.textContent.includes('%') ? '%' : 
+                              element.textContent.includes('+') ? '+' : '';
                 
-                animateCounter(counter, target, suffix);
-                observer.unobserve(counter);
+                animateCounter(element, target, suffix);
+                observer.unobserve(element);
             }
         });
     }, { threshold: 0.5 });
     
-    counters.forEach(counter => {
-        observer.observe(counter);
+    statElements.forEach(element => {
+        observer.observe(element);
     });
 }
 
-// Animate counter from 0 to target value
+// Counter Animation Function
 function animateCounter(element, target, suffix) {
     let current = 0;
-    const increment = target / 50; // Adjust speed here
+    const increment = target / 50; // Adjust speed
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
             current = target;
             clearInterval(timer);
         }
-        element.textContent = Math.floor(current) + suffix;
+        
+        if (suffix === '%') {
+            element.textContent = Math.round(current) + suffix;
+        } else {
+            element.textContent = Math.round(current) + suffix;
+        }
     }, 30);
 }
 
-// Initialize service card animations on scroll
-function initServiceCardAnimations() {
-    const serviceCards = document.querySelectorAll('.fade-in-service');
+// Service Cards Animation
+function initServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
     
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Stagger the animation for multiple cards
-                setTimeout(() => {
-                    entry.target.style.animationDelay = `${index * 0.1}s`;
-                    entry.target.classList.add('fade-in-service');
-                }, 100);
+                entry.target.style.animationPlayState = 'running';
                 observer.unobserve(entry.target);
             }
         });
@@ -126,11 +138,22 @@ function initServiceCardAnimations() {
     serviceCards.forEach(card => {
         observer.observe(card);
     });
+    
+    // Add hover effects
+    serviceCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
 }
 
-// Initialize scroll animations for various elements
+// Scroll Animations
 function initScrollAnimations() {
-    const fadeElements = document.querySelectorAll('.fade-in, .slide-up');
+    const fadeElements = document.querySelectorAll('.fade-in, .fade-in-service');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -146,71 +169,119 @@ function initScrollAnimations() {
     });
 }
 
-// Initialize hover effects for interactive elements
-function initHoverEffects() {
-    // Add ripple effect to buttons
-    const buttons = document.querySelectorAll('.tech-hero-button, .cta-button');
-    
-    buttons.forEach(button => {
-        button.addEventListener('mouseenter', function(e) {
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple-effect');
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-    
-    // Add CSS for ripple effect
-    const style = document.createElement('style');
-    style.textContent = `
-        .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
-            transform: scale(0);
-            animation: ripple 0.6s linear;
-            pointer-events: none;
-        }
-        
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Parallax effect for hero section
-function initParallax() {
-    const hero = document.querySelector('.tech-hero');
+// Floating Elements Animation
+function initFloatingElements() {
     const floatingElements = document.querySelectorAll('.tech-floating-element');
     
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
+    floatingElements.forEach(element => {
+        // Add random movement patterns
+        const randomX = (Math.random() - 0.5) * 40;
+        const randomY = (Math.random() - 0.5) * 40;
         
-        floatingElements.forEach((element, index) => {
-            const speed = (index % 3 + 1) * 0.5;
-            element.style.transform = `translateY(${rate * speed}px)`;
-        });
+        element.style.transform = `translate(${randomX}px, ${randomY}px)`;
     });
 }
 
-// Initialize page when DOM is fully loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTechnologyPage);
-} else {
-    initTechnologyPage();
+// Mobile Menu Functionality
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.classList.toggle('active');
+            
+            // Update ARIA attributes
+            const isExpanded = navLinks.classList.contains('active');
+            this.setAttribute('aria-expanded', isExpanded);
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.nav') && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navLinksItems = document.querySelectorAll('.nav-link');
+        navLinksItems.forEach(link => {
+            link.addEventListener('click', function() {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('active');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
 }
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Performance optimization for animations
+let ticking = false;
+function updateOnScroll() {
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        requestAnimationFrame(updateOnScroll);
+        ticking = true;
+    }
+});
+
+// Handle page load animations
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+    
+    // Initialize any lazy loading elements
+    const lazyElements = document.querySelectorAll('[data-lazy]');
+    lazyElements.forEach(element => {
+        const src = element.getAttribute('data-lazy');
+        if (src) {
+            element.src = src;
+        }
+    });
+});
+
+// Error handling for images
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function() {
+        this.style.display = 'none';
+        console.warn('Failed to load image:', this.src);
+    });
+});
+
+// Export functions for potential use in other modules
+window.SkaiTechnology = {
+    initTechnologyHero,
+    initAnimatedStats,
+    initServiceCards,
+    initScrollAnimations,
+    initFloatingElements,
+    initMobileMenu
+};
