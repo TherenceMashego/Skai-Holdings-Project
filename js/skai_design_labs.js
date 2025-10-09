@@ -1,63 +1,88 @@
-// Design Labs Page Specific JavaScript
+// Enhanced Design Labs Page JavaScript
 
-// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize design labs page components
-    initDesignFloatingElements();
-    initDesignScrollAnimations();
+    // Initialize Design Labs Page
+    initDesignLabsPage();
     
-    // Add scroll event listener for service card animations
-    window.addEventListener('scroll', handleDesignServiceCardScroll);
+    // Initialize animations
+    initAnimations();
     
-    // Initial check for service cards in view
-    handleDesignServiceCardScroll();
+    // Initialize floating elements
+    initFloatingElements();
     
-    // Initialize design process animations
-    initDesignProcessAnimations();
+    // Initialize service card interactions
+    initServiceCards();
     
-    // Set active navigation link
-    setActiveNavLink();
+    // Initialize performance optimizations
+    initPerformanceOptimizations();
 });
 
-// Initialize floating elements for design labs hero section
-function initDesignFloatingElements() {
+// Initialize Design Labs Page
+function initDesignLabsPage() {
+    console.log('Initializing Skai Design Labs Page');
+    
+    // Set up intersection observer for animations
+    setupIntersectionObserver();
+    
+    // Initialize scroll effects
+    initScrollEffects();
+    
+    // Initialize mobile menu
+    initMobileMenu();
+}
+
+// Initialize animations
+function initAnimations() {
+    // Add animation delays for staggered effects
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        card.style.animationDelay = `${(index + 1) * 0.1}s`;
+    });
+    
+    const methodologyCards = document.querySelectorAll('.methodology-card');
+    methodologyCards.forEach((card, index) => {
+        card.style.animationDelay = `${(index + 1) * 0.1}s`;
+    });
+    
+    // Add scroll-triggered animations
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .fade-in-service');
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+    });
+}
+
+// Initialize floating elements
+function initFloatingElements() {
     const floatingContainer = document.querySelector('.design-floating-elements');
     if (!floatingContainer) return;
     
-    const colors = ['#b967ff', '#ff2a6d', '#05ffa1', '#00f3ff'];
-    const shapes = ['circle', 'square', 'triangle'];
-    const sizes = [12, 20, 28, 36];
+    // Clear any existing elements
+    floatingContainer.innerHTML = '';
     
     // Create floating elements
-    for (let i = 0; i < 15; i++) {
+    const elementCount = 15;
+    const colors = [
+        'rgba(37, 99, 235, 0.1)',
+        'rgba(37, 99, 235, 0.15)',
+        'rgba(37, 99, 235, 0.2)'
+    ];
+    
+    for (let i = 0; i < elementCount; i++) {
         const element = document.createElement('div');
-        element.classList.add('design-floating-element');
+        element.className = 'design-floating-element';
         
         // Random properties
-        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        const size = Math.random() * 20 + 5;
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
         const left = Math.random() * 100;
         const top = Math.random() * 100;
-        const duration = 25 + Math.random() * 35;
+        const duration = Math.random() * 20 + 10;
         const delay = Math.random() * 5;
         
         // Apply styles
         element.style.width = `${size}px`;
         element.style.height = `${size}px`;
-        
-        // Different shapes for design elements
-        if (shape === 'square') {
-            element.style.borderRadius = '5px';
-            element.style.transform = 'rotate(45deg)';
-        } else if (shape === 'triangle') {
-            element.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
-            element.style.borderRadius = '0';
-        } else {
-            element.style.borderRadius = '50%';
-        }
-        
-        element.style.background = `radial-gradient(circle, ${color}, transparent)`;
+        element.style.background = color;
         element.style.left = `${left}%`;
         element.style.top = `${top}%`;
         element.style.animationDuration = `${duration}s`;
@@ -67,150 +92,214 @@ function initDesignFloatingElements() {
     }
 }
 
-// Initialize scroll animations for design labs page
-function initDesignScrollAnimations() {
+// Initialize service card interactions
+function initServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+        // Add hover effects
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px)';
+            this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.08)';
+        });
+        
+        // Add click effect for mobile
+        card.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                this.classList.toggle('expanded');
+            }
+        });
+    });
+}
+
+// Initialize performance optimizations
+function initPerformanceOptimizations() {
+    // Lazy load images
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+    
+    // Debounce scroll events
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        
+        scrollTimeout = setTimeout(function() {
+            // Handle scroll-based animations
+            handleScrollAnimations();
+        }, 10);
+    });
+}
+
+// Set up intersection observer for animations
+function setupIntersectionObserver() {
     const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                
-                // Add specific animations for methodology cards
-                if (entry.target.classList.contains('methodology-card')) {
-                    entry.target.style.animation = 'slideUp 0.6s ease forwards';
-                }
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    // Observe elements for scroll animations
-    document.querySelectorAll('.fade-in, .slide-up, .methodology-card').forEach(el => {
-        observer.observe(el);
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll('.fade-in, .slide-up, .fade-in-service');
+    animatedElements.forEach(element => {
+        observer.observe(element);
     });
 }
 
-// Handle service card scroll animations for design labs page
-function handleDesignServiceCardScroll() {
-    const serviceCards = document.querySelectorAll('.fade-in-service');
+// Initialize scroll effects
+function initScrollEffects() {
+    let lastScrollTop = 0;
+    const header = document.querySelector('.header');
     
-    serviceCards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // If card is in viewport
-        if (cardTop < windowHeight - 100) {
-            card.classList.add('visible');
-        }
-    });
-}
-
-// Initialize design process animations
-function initDesignProcessAnimations() {
-    const processStages = document.querySelectorAll('.process-stage');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Staggered animation for process stages
-                setTimeout(() => {
-                    entry.target.style.animation = `bounceIn 0.6s ease forwards`;
-                }, index * 200);
-            }
-        });
-    }, { threshold: 0.5 });
-    
-    processStages.forEach(stage => {
-        observer.observe(stage);
-    });
-}
-
-// Add active state to current page in navigation
-function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.nav-link, .dropdown-link');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && href.includes(currentPage)) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Enhanced hover effects for design service cards
-function enhanceDesignServiceCards() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px) rotate(1deg)';
-            this.style.boxShadow = '0 25px 50px rgba(185, 103, 255, 0.15)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) rotate(0deg)';
-            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-        });
-    });
-}
-
-// Initialize enhanced service cards
-enhanceDesignServiceCards();
-
-// Interactive design elements
-function initInteractiveDesignElements() {
-    // Add click effects to methodology cards
-    const methodologyCards = document.querySelectorAll('.methodology-card');
-    
-    methodologyCards.forEach(card => {
-        card.addEventListener('click', function() {
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
-    });
-}
-
-// Initialize interactive elements
-initInteractiveDesignElements();
-
-// Design-specific animations
-function initDesignAnimations() {
-    // Add CSS for bounceIn animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes bounceIn {
-            0% { opacity: 0; transform: scale(0.3); }
-            50% { opacity: 1; transform: scale(1.05); }
-            70% { transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
+        // Header scroll effect
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
         }
         
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        lastScrollTop = scrollTop;
+        
+        // Parallax effect for hero section
+        const heroSection = document.querySelector('.design-hero');
+        if (heroSection) {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.5;
+            heroSection.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
         }
-    `;
-    document.head.appendChild(style);
+    }, { passive: true });
 }
 
-// Initialize design animations
-initDesignAnimations();
-
-// Add loading animation for design labs page
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
+// Handle scroll animations
+function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.service-card, .methodology-card');
+    const windowHeight = window.innerHeight;
     
-    // Add a slight delay to ensure all elements are loaded
-    setTimeout(() => {
-        const designHero = document.querySelector('.design-hero');
-        if (designHero) {
-            designHero.classList.add('loaded');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < windowHeight - elementVisible) {
+            element.classList.add('animate-in');
         }
-    }, 300);
+    });
+}
+
+// Initialize mobile menu
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.setAttribute('aria-expanded', 
+                this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+            );
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-link, .dropdown-link');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+}
+
+// Add smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
 });
+
+// Add loading state for buttons
+document.querySelectorAll('a[href], button').forEach(element => {
+    element.addEventListener('click', function(e) {
+        if (this.href || this.type === 'submit') {
+            this.classList.add('loading');
+            
+            // Remove loading state after a delay (for demo purposes)
+            setTimeout(() => {
+                this.classList.remove('loading');
+            }, 1500);
+        }
+    });
+});
+
+// Performance monitoring
+if ('performance' in window) {
+    // Measure page load time
+    window.addEventListener('load', function() {
+        const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+        console.log(`Page load time: ${loadTime}ms`);
+        
+        // Send to analytics (placeholder)
+        if (loadTime > 3000) {
+            console.warn('Page load time is above 3 seconds. Consider optimization.');
+        }
+    });
+}
+
+// Error handling
+window.addEventListener('error', function(e) {
+    console.error('JavaScript Error:', e.error);
+});
+
+// Export functions for potential reuse
+window.SkaiDesignLabs = {
+    initDesignLabsPage,
+    initAnimations,
+    initFloatingElements,
+    initServiceCards
+};

@@ -1,68 +1,62 @@
-// Management & Advisory Page Specific JavaScript
+// Management & Advisory Page JavaScript
 
-// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize management & advisory page components
-    initManagementFloatingElements();
-    initManagementScrollAnimations();
+    console.log('Initializing Skai Management & Advisory Page');
     
-    // Add scroll event listener for service card animations
-    window.addEventListener('scroll', handleManagementServiceCardScroll);
-    
-    // Initial check for service cards in view
-    handleManagementServiceCardScroll();
-    
-    // Initialize management process animations
-    initManagementProcessAnimations();
-    
-    // Set active navigation link
-    setActiveNavLink();
-    
-    // Initialize results counter animation
-    initResultsCounter();
+    // Initialize all components
+    initManagementHero();
+    initAnimatedStats();
+    initServiceCards();
+    initScrollAnimations();
+    initFloatingElements();
+    initMobileMenu();
 });
 
-// Initialize floating elements for management hero section
-function initManagementFloatingElements() {
+// Management Hero Initialization
+function initManagementHero() {
+    const heroSection = document.querySelector('.management-hero');
+    
+    // Create floating elements for visual interest
+    createFloatingElements();
+    
+    // Add scroll event listener to keep hero section solid
+    window.addEventListener('scroll', function() {
+        const scrollPosition = window.scrollY;
+        const heroHeight = heroSection.offsetHeight;
+        
+        // Keep hero section solid - no fade effect
+        if (scrollPosition < heroHeight) {
+            heroSection.style.opacity = '1';
+        }
+    });
+}
+
+// Create floating elements for hero section
+function createFloatingElements() {
     const floatingContainer = document.querySelector('.management-floating-elements');
     if (!floatingContainer) return;
     
-    const colors = ['#00f3ff', '#05ffa1', '#b967ff', '#ff2a6d'];
-    const shapes = ['circle', 'square', 'hexagon', 'octagon'];
-    const sizes = [12, 20, 28, 36];
+    // Clear any existing elements
+    floatingContainer.innerHTML = '';
     
-    // Create floating elements
+    const colors = ['#2563eb', '#1e40af', '#3b82f6', '#60a5fa'];
+    
     for (let i = 0; i < 15; i++) {
         const element = document.createElement('div');
         element.classList.add('management-floating-element');
         
         // Random properties
-        const size = sizes[Math.floor(Math.random() * sizes.length)];
+        const size = Math.random() * 20 + 5;
         const color = colors[Math.floor(Math.random() * colors.length)];
-        const shape = shapes[Math.floor(Math.random() * shapes.length)];
         const left = Math.random() * 100;
         const top = Math.random() * 100;
-        const duration = 25 + Math.random() * 35;
+        const duration = Math.random() * 20 + 10;
         const delay = Math.random() * 5;
         
         // Apply styles
         element.style.width = `${size}px`;
         element.style.height = `${size}px`;
-        
-        // Different shapes for management elements
-        if (shape === 'square') {
-            element.style.borderRadius = '5px';
-        } else if (shape === 'hexagon') {
-            element.style.clipPath = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)';
-            element.style.borderRadius = '0';
-        } else if (shape === 'octagon') {
-            element.style.clipPath = 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)';
-            element.style.borderRadius = '0';
-        } else {
-            element.style.borderRadius = '50%';
-        }
-        
-        element.style.background = `radial-gradient(circle, ${color}, transparent)`;
+        element.style.background = color;
         element.style.left = `${left}%`;
         element.style.top = `${top}%`;
         element.style.animationDuration = `${duration}s`;
@@ -72,214 +66,179 @@ function initManagementFloatingElements() {
     }
 }
 
-// Initialize scroll animations for management page
-function initManagementScrollAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// Initialize animated statistics - FIXED VERSION
+function initAnimatedStats() {
+    const statElements = document.querySelectorAll('.stat-number, .result-number');
     
-    const observer = new IntersectionObserver((entries) => {
+    // Create Intersection Observer for stats
+    const statsObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                
-                // Add specific animations for process steps
-                if (entry.target.classList.contains('process-step')) {
-                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                const element = entry.target;
+                const targetValue = parseInt(element.getAttribute('data-count'));
+                console.log('Animating counter:', targetValue, element);
+                if (!isNaN(targetValue)) {
+                    animateCounter(element, targetValue);
+                } else {
+                    console.error('Invalid data-count value:', element.getAttribute('data-count'));
                 }
-            }
-        });
-    }, observerOptions);
-    
-    // Observe elements for scroll animations
-    document.querySelectorAll('.fade-in, .slide-up, .process-step').forEach(el => {
-        observer.observe(el);
-    });
-}
-
-// Handle service card scroll animations for management page
-function handleManagementServiceCardScroll() {
-    const serviceCards = document.querySelectorAll('.fade-in-service');
-    
-    serviceCards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        // If card is in viewport
-        if (cardTop < windowHeight - 100) {
-            card.classList.add('visible');
-        }
-    });
-}
-
-// Initialize management process animations
-function initManagementProcessAnimations() {
-    const processSteps = document.querySelectorAll('.process-step');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Staggered animation for process steps
-                setTimeout(() => {
-                    entry.target.style.animation = `slideInUp 0.8s ease forwards`;
-                }, index * 150);
-            }
-        });
-    }, { threshold: 0.3 });
-    
-    processSteps.forEach(step => {
-        observer.observe(step);
-    });
-}
-
-// Add active state to current page in navigation
-function setActiveNavLink() {
-    const currentPage = window.location.pathname.split('/').pop();
-    const navLinks = document.querySelectorAll('.nav-link, .dropdown-link');
-    
-    navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && href.includes(currentPage)) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Enhanced hover effects for management service cards
-function enhanceManagementServiceCards() {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    serviceCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
-            this.style.boxShadow = '0 25px 50px rgba(0, 243, 255, 0.15)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-            this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-        });
-    });
-}
-
-// Initialize enhanced service cards
-enhanceManagementServiceCards();
-
-// Interactive process steps
-function initInteractiveProcessSteps() {
-    const processSteps = document.querySelectorAll('.process-step');
-    
-    processSteps.forEach(step => {
-        step.addEventListener('click', function() {
-            // Add click animation
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
-        
-        // Add keyboard navigation
-        step.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                this.click();
-            }
-        });
-        
-        // Make steps focusable
-        step.setAttribute('tabindex', '0');
-    });
-}
-
-// Initialize interactive elements
-initInteractiveProcessSteps();
-
-// Results counter animation
-function initResultsCounter() {
-    const resultNumbers = document.querySelectorAll('.result-number');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.textContent.replace('%', ''));
-                animateCounter(entry.target, target);
-                observer.unobserve(entry.target);
+                statsObserver.unobserve(element);
             }
         });
     }, { threshold: 0.5 });
     
-    resultNumbers.forEach(number => {
-        observer.observe(number);
+    // Observe all stat elements
+    statElements.forEach(element => {
+        // Set initial value to 0
+        element.textContent = '0%';
+        statsObserver.observe(element);
     });
+}
+
+// Animate counter from 0 to target value - FIXED VERSION
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const duration = 30; // ms between updates
     
-    function animateCounter(element, target) {
-        let current = 0;
-        const increment = target / 50;
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target + '%';
+            clearInterval(timer);
+        } else {
             element.textContent = Math.floor(current) + '%';
-        }, 30);
-    }
+        }
+    }, duration);
 }
 
-// Management-specific animations
-function initManagementAnimations() {
-    // Add CSS for management-specific animations
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(0, 243, 255, 0.6); }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// Initialize management animations
-initManagementAnimations();
-
-// Add loading animation for management page
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
+// Initialize service cards interactions
+function initServiceCards() {
+    const serviceCards = document.querySelectorAll('.service-card, .process-step, .result-item');
     
-    // Add a slight delay to ensure all elements are loaded
-    setTimeout(() => {
-        const managementHero = document.querySelector('.management-hero');
-        if (managementHero) {
-            managementHero.classList.add('loaded');
-        }
-    }, 300);
-});
-
-// Professional interactive features
-function initProfessionalInteractiveFeatures() {
-    // Add subtle hover effects to result cards
-    const resultCards = document.querySelectorAll('.result-card');
-    
-    resultCards.forEach(card => {
+    serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.animation = 'pulseGlow 2s infinite';
+            this.style.transform = 'translateY(-8px)';
+            this.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.15)';
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.animation = 'none';
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.08)';
         });
     });
 }
 
-// Initialize professional interactive features
-initProfessionalInteractiveFeatures();
+// Initialize scroll animations
+function initScrollAnimations() {
+    // Create observer for fade-in elements
+    const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Observe all fade-in elements
+    const fadeElements = document.querySelectorAll('.fade-in, .fade-in-service');
+    fadeElements.forEach(element => {
+        // Set initial state
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        fadeObserver.observe(element);
+    });
+}
+
+// Initialize floating elements animation
+function initFloatingElements() {
+    const floatingElements = document.querySelectorAll('.management-floating-element');
+    
+    // Add random movement to floating elements
+    floatingElements.forEach(element => {
+        // Randomize animation properties
+        const duration = 15 + Math.random() * 15;
+        const delay = Math.random() * 5;
+        
+        element.style.animationDuration = `${duration}s`;
+        element.style.animationDelay = `${delay}s`;
+    });
+}
+
+// Initialize mobile menu
+function initMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.setAttribute('aria-expanded', 
+                this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+            );
+        });
+        
+        // Close mobile menu when clicking on a link
+        const navItems = document.querySelectorAll('.nav-link, .dropdown-link');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+}
+
+// Handle page load animations
+window.addEventListener('load', function() {
+    // Ensure all elements are properly loaded before animations
+    setTimeout(() => {
+        document.body.classList.add('page-loaded');
+    }, 100);
+});
+
+// Add smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Add keyboard navigation support
+document.addEventListener('keydown', function(e) {
+    // Tab key navigation - add focus styles
+    if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+    }
+});
+
+document.addEventListener('mousedown', function() {
+    // Remove keyboard navigation class on mouse interaction
+    document.body.classList.remove('keyboard-navigation');
+});
+
+// Export functions for potential reuse
+window.SkaiManagementAdvisory = {
+    initManagementHero,
+    initAnimatedStats,
+    initServiceCards,
+    initScrollAnimations,
+    initFloatingElements
+};

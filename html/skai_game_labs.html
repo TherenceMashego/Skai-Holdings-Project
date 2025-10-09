@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKAI GAME LABS - Immersive Gaming Experiences</title>
+    <title>Skai Game Labs - Immersive Gaming Experiences</title>
+    <meta name="description" content="Skai Game Labs creates immersive gaming experiences across all platforms with cutting-edge technology and creative expertise.">
     <link rel="stylesheet" href="../css/skai_game_labs.css">
+    <link rel="stylesheet" href="../css/home_styling.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -13,98 +15,107 @@
     <header class="header">
         <nav class="nav">
             <div class="logo">
-                <img src="../assets/logo.png" alt="SKAI HOLDINGS Logo">
-                <span class="logo-text">SKAI HOLDINGS</span>
+                <img src="../assets/logo.png" alt="SKAI HOLDINGS Logo" width="40" height="40">
+                <span class="logo-text">Skai Holdings</span>
             </div>
             <ul class="nav-links">
                 <li><a href="../index.html" class="nav-link">Home</a></li>
                 <li><a href="../index.html#about" class="nav-link">About</a></li>
                 <li class="nav-dropdown">
-                    <a href="../index.html#services" class="nav-link dropdown-toggle">
-                        Services <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    <a href="../index.html#services" class="nav-link dropdown-toggle" aria-expanded="false">
+                        Services <i class="fas fa-chevron-down dropdown-arrow" aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="skai_technology.html" class="dropdown-link">SKAI TECHNOLOGY</a></li>
-                        <li><a href="skai_design_labs.html" class="dropdown-link">SKAI DESIGN LABS</a></li>
-                        <li><a href="skai_game_labs.html" class="dropdown-link">SKAI GAME LABS</a></li>
-                        <li><a href="skai_management_advisory.html" class="dropdown-link">SKAI MANAGEMENT & ADVISORY</a></li>
-                        <li><a href="uthando_africa.html" class="dropdown-link">UTHANDO AFRICA</a></li>
+                        <li><a href="skai_technology.html" class="dropdown-link">Skai Technology</a></li>
+                        <li><a href="skai_design_labs.html" class="dropdown-link">Skai Design Labs</a></li>
+                        <li><a href="skai_game_labs.html" class="dropdown-link active">Skai Game Labs</a></li>
+                        <li><a href="skai_management_advisory.html" class="dropdown-link">Skai Management & Advisory</a></li>
+                        <li><a href="uthando_africa.html" class="dropdown-link">Uthando Africa</a></li>
                     </ul>
                 </li>
                 <li><a href="../index.html#impact" class="nav-link">Impact</a></li>
                 <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
             </ul>
-            <button class="mobile-menu-toggle">☰</button>
+            <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">☰</button>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="game-hero">
+    <section class="game-hero" aria-labelledby="game-hero-title">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">SKAI GAME LABS</h1>
-                <p class="hero-subtitle">Building immersive worlds and captivating gaming experiences</p>
+                <h1 id="game-hero-title" class="hero-title fade-in">Skai Game Labs</h1>
+                <p class="hero-subtitle fade-in">Creating immersive gaming experiences across all platforms</p>
                 <div class="game-stats">
-                    <div class="stat">
-                        <div class="stat-number">25+</div>
+                    <div class="stat fade-in">
+                        <div class="stat-number" data-count="25">0+</div>
                         <div class="stat-label">Games Developed</div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-number">10M+</div>
+                    <div class="stat fade-in">
+                        <div class="stat-number" data-count="10">0M+</div>
                         <div class="stat-label">Players Worldwide</div>
                     </div>
-                    <div class="stat">
+                    <div class="stat fade-in">
                         <div class="stat-number">4.8★</div>
                         <div class="stat-label">Average Rating</div>
                     </div>
                 </div>
+                <div class="hero-cta fade-in">
+                    <a href="#game-services" class="hero-button" aria-label="Explore our game development services">
+                        <span class="button-text">Explore Our Services</span>
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="game-elements">
-            <div class="pixel-particle"></div>
-            <div class="pixel-particle"></div>
-            <div class="pixel-particle"></div>
+        <div class="game-floating-elements" aria-hidden="true">
+            <!-- Elements will be generated by JavaScript -->
         </div>
+        <div class="game-grid" aria-hidden="true"></div>
     </section>
 
     <!-- Game Services -->
-    <section class="game-services">
+    <section id="game-services" class="game-services" aria-labelledby="game-services-title">
         <div class="container">
             <div class="section-header">
-                <h2>Our Game Development Services</h2>
-                <p>From concept to launch and beyond</p>
+                <h2 id="game-services-title">Our Game Development Services</h2>
+                <p>Comprehensive solutions from concept to launch</p>
             </div>
             <div class="services-grid">
-                <div class="game-service">
-                    <div class="service-icon">
+                <article class="game-service fade-in-service">
+                    <div class="service-icon" aria-hidden="true">
                         <i class="fas fa-gamepad"></i>
+                        <div class="icon-glow" aria-hidden="true"></div>
                     </div>
                     <h3>Full-Cycle Development</h3>
-                    <p>End-to-end game development from initial concept to final release.</p>
+                    <p>Complete game development from initial concept to final release.</p>
                     <ul class="service-features">
-                        <li>Concept Development</li>
-                        <li>Game Design</li>
+                        <li>Concept & Design</li>
                         <li>Art & Animation</li>
                         <li>Programming</li>
                         <li>QA Testing</li>
                     </ul>
-                </div>
-                <div class="game-service">
-                    <div class="service-icon">
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
+                <article class="game-service fade-in-service">
+                    <div class="service-icon" aria-hidden="true">
                         <i class="fas fa-mobile-alt"></i>
+                        <div class="icon-glow" aria-hidden="true"></div>
                     </div>
                     <h3>Mobile Game Development</h3>
-                    <p>Creating engaging mobile experiences for iOS and Android platforms.</p>
+                    <p>Engaging mobile experiences for iOS and Android platforms.</p>
                     <ul class="service-features">
-                        <li>iOS & Android Development</li>
-                        <li>Cross-Platform Solutions</li>
+                        <li>iOS & Android</li>
+                        <li>Cross-Platform</li>
                         <li>Mobile Optimization</li>
                         <li>App Store Publishing</li>
                     </ul>
-                </div>
-                <div class="game-service">
-                    <div class="service-icon">
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
+                <article class="game-service fade-in-service">
+                    <div class="service-icon" aria-hidden="true">
                         <i class="fas fa-desktop"></i>
+                        <div class="icon-glow" aria-hidden="true"></div>
                     </div>
                     <h3>PC & Console Development</h3>
                     <p>High-quality gaming experiences for PC and console platforms.</p>
@@ -112,100 +123,160 @@
                         <li>Unity & Unreal Engine</li>
                         <li>Console Certification</li>
                         <li>PC Optimization</li>
-                        <li>Multiplayer Integration</li>
+                        <li>Multiplayer Systems</li>
                     </ul>
-                </div>
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Game Engines -->
-    <section class="game-engines">
+    <section class="game-engines" aria-labelledby="game-engines-title">
         <div class="container">
             <div class="section-header">
-                <h2>Our Technology Stack</h2>
-                <p>Leveraging industry-leading game engines and tools</p>
+                <h2 id="game-engines-title">Technology Expertise</h2>
+                <p>Industry-leading game engines and development tools</p>
             </div>
             <div class="engines-grid">
-                <div class="engine-card">
-                    <div class="engine-icon">
+                <article class="engine-card fade-in">
+                    <div class="engine-icon" aria-hidden="true">
                         <i class="fab fa-unity"></i>
                     </div>
                     <h3>Unity</h3>
                     <p>Cross-platform development for 2D and 3D games</p>
-                </div>
-                <div class="engine-card">
-                    <div class="engine-icon">
+                </article>
+                <article class="engine-card fade-in">
+                    <div class="engine-icon" aria-hidden="true">
                         <i class="fas fa-cube"></i>
                     </div>
                     <h3>Unreal Engine</h3>
-                    <p>High-fidelity 3D experiences with cutting-edge graphics</p>
-                </div>
-                <div class="engine-card">
-                    <div class="engine-icon">
+                    <p>High-fidelity 3D experiences with advanced graphics</p>
+                </article>
+                <article class="engine-card fade-in">
+                    <div class="engine-icon" aria-hidden="true">
                         <i class="fab fa-html5"></i>
                     </div>
                     <h3>HTML5</h3>
                     <p>Browser-based games with WebGL and Canvas</p>
-                </div>
-                <div class="engine-card">
-                    <div class="engine-icon">
+                </article>
+                <article class="engine-card fade-in">
+                    <div class="engine-icon" aria-hidden="true">
                         <i class="fas fa-server"></i>
                     </div>
                     <h3>Backend Services</h3>
                     <p>Multiplayer, analytics, and live operations</p>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Portfolio -->
-    <section class="game-portfolio">
+    <section class="game-portfolio" aria-labelledby="game-portfolio-title">
         <div class="container">
             <div class="section-header">
-                <h2>Featured Games</h2>
-                <p>Showcasing our passion for creating memorable gaming experiences</p>
+                <h2 id="game-portfolio-title">Featured Games</h2>
+                <p>Showcasing our passion for creating memorable experiences</p>
             </div>
             <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="game-preview" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);"></div>
-                    <h4>Cyber Nexus</h4>
-                    <p>Action RPG set in a futuristic cyberpunk world</p>
-                    <div class="game-platforms">
-                        <span>PC</span>
-                        <span>PS5</span>
-                        <span>XBOX</span>
+                <article class="portfolio-item fade-in">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #2563eb, #1e40af);" aria-hidden="true"></div>
+                    <div class="portfolio-content">
+                        <h4>Cyber Nexus</h4>
+                        <p>Action RPG in a futuristic cyberpunk world</p>
+                        <div class="game-platforms">
+                            <span>PC</span>
+                            <span>PS5</span>
+                            <span>XBOX</span>
+                        </div>
                     </div>
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
+                <article class="portfolio-item fade-in">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);" aria-hidden="true"></div>
+                    <div class="portfolio-content">
+                        <h4>Mythic Quest</h4>
+                        <p>Mobile strategy with deep progression systems</p>
+                        <div class="game-platforms">
+                            <span>iOS</span>
+                            <span>Android</span>
+                        </div>
+                    </div>
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
+                <article class="portfolio-item fade-in">
+                    <div class="game-preview" style="background: linear-gradient(135deg, #dc2626, #b91c1c);" aria-hidden="true"></div>
+                    <div class="portfolio-content">
+                        <h4>Pixel Pioneers</h4>
+                        <p>Casual puzzle adventure with retro aesthetics</p>
+                        <div class="game-platforms">
+                            <span>Mobile</span>
+                            <span>Web</span>
+                        </div>
+                    </div>
+                    <div class="card-glow" aria-hidden="true"></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Process -->
+    <section class="development-process" aria-labelledby="development-process-title">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="development-process-title">Our Development Process</h2>
+                <p>A structured approach to creating exceptional gaming experiences</p>
+            </div>
+            <div class="process-timeline">
+                <div class="process-phase fade-in">
+                    <div class="phase-icon" aria-hidden="true">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Concept & Design</h3>
+                    <p>Ideation, game design documents, and prototyping</p>
                 </div>
-                <div class="portfolio-item">
-                    <div class="game-preview" style="background: linear-gradient(135deg, #a29bfe, #6c5ce7);"></div>
-                    <h4>Mythic Quest</h4>
-                    <p>Mobile strategy game with deep progression systems</p>
-                    <div class="game-platforms">
-                        <span>iOS</span>
-                        <span>Android</span>
+                <div class="process-phase fade-in">
+                    <div class="phase-icon" aria-hidden="true">
+                        <i class="fas fa-pencil-alt"></i>
                     </div>
+                    <h3>Pre-Production</h3>
+                    <p>Art direction, technical design, and asset planning</p>
                 </div>
-                <div class="portfolio-item">
-                    <div class="game-preview" style="background: linear-gradient(135deg, #fd79a8, #e84393);"></div>
-                    <h4>Pixel Pioneers</h4>
-                    <p>Casual puzzle adventure with retro aesthetics</p>
-                    <div class="game-platforms">
-                        <span>Mobile</span>
-                        <span>Web</span>
+                <div class="process-phase fade-in">
+                    <div class="phase-icon" aria-hidden="true">
+                        <i class="fas fa-code"></i>
                     </div>
+                    <h3>Production</h3>
+                    <p>Development, asset creation, and implementation</p>
+                </div>
+                <div class="process-phase fade-in">
+                    <div class="phase-icon" aria-hidden="true">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Testing & QA</h3>
+                    <p>Quality assurance, bug fixing, and optimization</p>
+                </div>
+                <div class="process-phase fade-in">
+                    <div class="phase-icon" aria-hidden="true">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Launch & Support</h3>
+                    <p>Release, marketing, and ongoing maintenance</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="game-cta">
+    <section class="game-cta" aria-labelledby="game-cta-title">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Create Your Next Gaming Hit?</h2>
-                <p>Let's collaborate to bring your game vision to life with passion and precision.</p>
-                <a href="../index.html#contact" class="cta-button">Start Your Project</a>
+                <h2 id="game-cta-title">Ready to Create Your Next Gaming Hit?</h2>
+                <p>Let's collaborate to bring your game vision to life.</p>
+                <a href="../index.html#contact" class="cta-button" aria-label="Start your game development project with Skai Game Labs">
+                    <span class="button-text">Start Your Project</span>
+                    <div class="button-glow" aria-hidden="true"></div>
+                </a>
             </div>
         </div>
     </section>
@@ -216,21 +287,21 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="footer-logo">
-                        <img src="../assets/logo_footer.png" alt="SKAI HOLDINGS Footer Logo">
+                        <img src="../assets/logo_footer.png" alt="SKAI HOLDINGS Footer Logo" width="150" height="40" loading="lazy">
                     </div>
                     <p>Your premier partner for intelligent digital solutions, AI innovation, and cutting-edge technology services in Johannesburg and beyond.</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
                         </a>
                         <a href="https://www.linkedin.com" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                         </a>
                         <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
                         </a>
                         <a href="https://wa.me" target="_blank" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -247,26 +318,26 @@
                 <div class="footer-column">
                     <h3>Services</h3>
                     <ul class="footer-menu">
-                        <li><a href="skai_technology.html">SKAI TECHNOLOGY</a></li>
-                        <li><a href="skai_design_labs.html">SKAI DESIGN LABS</a></li>
-                        <li><a href="skai_game_labs.html">SKAI GAME LABS</a></li>
-                        <li><a href="skai_management_advisory.html">SKAI MANAGEMENT & ADVISORY</a></li>
-                        <li><a href="uthando_africa.html">UTHANDO AFRICA</a></li>
+                        <li><a href="skai_technology.html">Skai Technology</a></li>
+                        <li><a href="skai_design_labs.html">Skai Design Labs</a></li>
+                        <li><a href="skai_game_labs.html">Skai Game Labs</a></li>
+                        <li><a href="skai_management_advisory.html">Skai Management & Advisory</a></li>
+                        <li><a href="uthando_africa.html">Uthando Africa</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact Info</h3>
                     <ul class="contact-info">
                         <li>
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
                             <span>hello@skai.co.za</span>
                         </li>
                         <li>
-                            <i class="fas fa-phone"></i>
+                            <i class="fas fa-phone" aria-hidden="true"></i>
                             <span>+27 XXX XXX XXXX</span>
                         </li>
                         <li>
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
                             <span>Sandton, Johannesburg</span>
                         </li>
                     </ul>
